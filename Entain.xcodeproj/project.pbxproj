@@ -1,0 +1,435 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2B783F8B9DD7A6D5AEC05820 /* ViewModels in Frameworks */ = {isa = PBXBuildFile; productRef = D0F2C07F173A85483C87CB53 /* ViewModels */; };
+		7344E829B58DFE15E4687E23 /* UI in Frameworks */ = {isa = PBXBuildFile; productRef = 89F36DB107B3B5659AAED463 /* UI */; };
+		90AC2CFC1B5A9FC99BB40153 /* Services in Frameworks */ = {isa = PBXBuildFile; productRef = DFAA44421D4BEC0007DFAA06 /* Services */; };
+		9822AFD4448D84C19DF86715 /* EntainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839D48716579721250859332 /* EntainApp.swift */; };
+		9E890E573012CA349CC7885A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE182E18CB2EEF336323B9DA /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		01BCF47B642E81DE723710AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		839D48716579721250859332 /* EntainApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntainApp.swift; sourceTree = "<group>"; };
+		9C915CAB0CF3102CD1F7CE17 /* UI */ = {isa = PBXFileReference; lastKnownFileType = folder; name = UI; path = Packages/UI; sourceTree = SOURCE_ROOT; };
+		B8834281061166837382ED32 /* Entain.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Entain.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE4499D0929D2A4B1FDB55BF /* Model */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Model; path = Packages/Model; sourceTree = SOURCE_ROOT; };
+		DC785A094EF9F856DEFD811E /* ViewModels */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ViewModels; path = Packages/ViewModels; sourceTree = SOURCE_ROOT; };
+		EE182E18CB2EEF336323B9DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F0D32F3C1035EC06DAD7CDC1 /* Services */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Services; path = Packages/Services; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BBA572F206E0BDD05D12ADBD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7344E829B58DFE15E4687E23 /* UI in Frameworks */,
+				90AC2CFC1B5A9FC99BB40153 /* Services in Frameworks */,
+				2B783F8B9DD7A6D5AEC05820 /* ViewModels in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		10934210D82907445C951D75 /* Entain */ = {
+			isa = PBXGroup;
+			children = (
+				EE182E18CB2EEF336323B9DA /* Assets.xcassets */,
+				839D48716579721250859332 /* EntainApp.swift */,
+				01BCF47B642E81DE723710AF /* Info.plist */,
+			);
+			path = Entain;
+			sourceTree = "<group>";
+		};
+		10956581B2A8A202B8842921 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				CE4499D0929D2A4B1FDB55BF /* Model */,
+				F0D32F3C1035EC06DAD7CDC1 /* Services */,
+				9C915CAB0CF3102CD1F7CE17 /* UI */,
+				DC785A094EF9F856DEFD811E /* ViewModels */,
+			);
+			path = Packages;
+			sourceTree = "<group>";
+		};
+		3B019A252DB8B532FB487BEF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B8834281061166837382ED32 /* Entain.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3DFBD967FBEA6D1E9E907E2E = {
+			isa = PBXGroup;
+			children = (
+				10934210D82907445C951D75 /* Entain */,
+				10956581B2A8A202B8842921 /* Packages */,
+				3B019A252DB8B532FB487BEF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		725A693C59D95FEC4AFD6140 /* Entain */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 771CF987FC2F9F0F80BF4A33 /* Build configuration list for PBXNativeTarget "Entain" */;
+			buildPhases = (
+				5B5597D77FE75365961B2D4D /* SwiftLint */,
+				068F363071413377E4E0235A /* Sources */,
+				8E0F59FF30ABD76F686884A0 /* Resources */,
+				BBA572F206E0BDD05D12ADBD /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Entain;
+			packageProductDependencies = (
+				89F36DB107B3B5659AAED463 /* UI */,
+				DFAA44421D4BEC0007DFAA06 /* Services */,
+				D0F2C07F173A85483C87CB53 /* ViewModels */,
+			);
+			productName = Entain;
+			productReference = B8834281061166837382ED32 /* Entain.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		95A1E65B1C7073A848E50F65 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1600;
+			};
+			buildConfigurationList = 110B22C517ED5E4751C5A1A8 /* Build configuration list for PBXProject "Entain" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 3DFBD967FBEA6D1E9E907E2E;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				76DE7C3D2DEDBECA9DAE9AED /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				60363011CDDED9A1B7C1AA7D /* XCRemoteSwiftPackageReference "SwiftLint" */,
+				3867B6B83DC91F9E7E67FED3 /* XCLocalSwiftPackageReference "Packages/Model" */,
+				1331C6501F11AFF419D4F239 /* XCLocalSwiftPackageReference "Packages/Services" */,
+				1ED1FF9322D0B589DDB03CC4 /* XCLocalSwiftPackageReference "Packages/UI" */,
+				464E09FB26C7DF71A92E72F1 /* XCLocalSwiftPackageReference "Packages/ViewModels" */,
+			);
+			preferredProjectObjectVersion = 77;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				725A693C59D95FEC4AFD6140 /* Entain */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8E0F59FF30ABD76F686884A0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9E890E573012CA349CC7885A /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5B5597D77FE75365961B2D4D /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint --config \"${SRCROOT}/.swiftlint.yml\"\nelse\n  echo \"warning: SwiftLint not installed. Install via: brew install swiftlint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		068F363071413377E4E0235A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9822AFD4448D84C19DF86715 /* EntainApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		802EB183CCAF278B07EB117D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		8973D4E7E5E784A3501531CC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Entain/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.entain.NextToGo;
+				PRODUCT_NAME = Entain;
+				SDKROOT = iphoneos;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		B78A9B662D162BCAD576243E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		CA35FC00079B1A7F32941FC9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Entain/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.entain.NextToGo;
+				PRODUCT_NAME = Entain;
+				SDKROOT = iphoneos;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		110B22C517ED5E4751C5A1A8 /* Build configuration list for PBXProject "Entain" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				802EB183CCAF278B07EB117D /* Debug */,
+				B78A9B662D162BCAD576243E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		771CF987FC2F9F0F80BF4A33 /* Build configuration list for PBXNativeTarget "Entain" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CA35FC00079B1A7F32941FC9 /* Debug */,
+				8973D4E7E5E784A3501531CC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		1331C6501F11AFF419D4F239 /* XCLocalSwiftPackageReference "Packages/Services" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/Services;
+		};
+		1ED1FF9322D0B589DDB03CC4 /* XCLocalSwiftPackageReference "Packages/UI" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/UI;
+		};
+		3867B6B83DC91F9E7E67FED3 /* XCLocalSwiftPackageReference "Packages/Model" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/Model;
+		};
+		464E09FB26C7DF71A92E72F1 /* XCLocalSwiftPackageReference "Packages/ViewModels" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/ViewModels;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		60363011CDDED9A1B7C1AA7D /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/SwiftLint";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.57.0;
+			};
+		};
+		76DE7C3D2DEDBECA9DAE9AED /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		89F36DB107B3B5659AAED463 /* UI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = UI;
+		};
+		D0F2C07F173A85483C87CB53 /* ViewModels */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ViewModels;
+		};
+		DFAA44421D4BEC0007DFAA06 /* Services */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Services;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 95A1E65B1C7073A848E50F65 /* Project object */;
+}
