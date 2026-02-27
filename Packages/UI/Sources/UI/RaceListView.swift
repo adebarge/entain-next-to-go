@@ -40,6 +40,7 @@ public struct RaceListView: View {
                 FilterBarView(
                     accessibilityText: RaceListViewModel.filterBarAccessibilityLabel,
                     selectedCategories: viewModel.selectedCategories,
+                    isDisabled: viewModel.isFilterBarDisabled,
                     onToggle: { viewModel.toggleCategory($0) }
                 )
                 .background(.bar)

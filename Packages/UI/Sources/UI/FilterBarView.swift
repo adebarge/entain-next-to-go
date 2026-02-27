@@ -6,15 +6,18 @@ import ViewModels
 public struct FilterBarView: View {
     private let accessibilityText: String
     private let selectedCategories: Set<RaceCategory>
+    private let isDisabled: Bool
     private let onToggle: (RaceCategory) -> Void
 
     public init(
         accessibilityText: String,
         selectedCategories: Set<RaceCategory>,
+        isDisabled: Bool = false,
         onToggle: @escaping (RaceCategory) -> Void
     ) {
         self.accessibilityText = accessibilityText
         self.selectedCategories = selectedCategories
+        self.isDisabled = isDisabled
         self.onToggle = onToggle
     }
 
@@ -33,6 +36,9 @@ public struct FilterBarView: View {
             .padding(.vertical, 8)
         }
         .accessibilityLabel(accessibilityText)
+        .disabled(isDisabled)
+        .opacity(isDisabled ? 0.4 : 1)
+        .animation(.easeInOut(duration: 0.2), value: isDisabled)
     }
 }
 
@@ -63,11 +69,20 @@ private struct CategoryChip: View {
 }
 
 #if DEBUG
-#Preview {
+#Preview("Enabled") {
     @Previewable @State var selected: Set<RaceCategory> = [.horse]
     FilterBarView(
         accessibilityText: "Category filter",
         selectedCategories: selected,
+        onToggle: { _ in }
+    )
+}
+
+#Preview("Disabled") {
+    FilterBarView(
+        accessibilityText: "Category filter",
+        selectedCategories: [.horse],
+        isDisabled: true,
         onToggle: { _ in }
     )
 }

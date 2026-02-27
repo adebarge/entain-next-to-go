@@ -22,6 +22,9 @@ public final class RaceListViewModel {
     public var selectedCategories: Set<RaceCategory> = []
     public var isLoading: Bool = false
     public var error: Error?
+    public var isFilterBarDisabled: Bool {
+        visibleRaces.isEmpty && (isLoading || error != nil)
+    }
 
     // MARK: - Private state
 
