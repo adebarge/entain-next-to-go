@@ -3,6 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "ViewModels",
+    defaultLocalization: "en",
     platforms: [.iOS(.v18), .macOS(.v14)],
     products: [
         .library(name: "ViewModels", targets: ["ViewModels"])
@@ -14,7 +15,8 @@ let package = Package(
         .target(
             name: "ViewModels",
             dependencies: ["Model"],
-            path: "Sources/ViewModels"
+            path: "Sources/ViewModels",
+            resources: [.process("Resources")]
         ),
         .testTarget(
             name: "ViewModelsTests",

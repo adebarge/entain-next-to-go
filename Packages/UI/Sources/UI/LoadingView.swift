@@ -1,10 +1,15 @@
-import L10n_swift
 import SwiftUI
 import Lottie
 
 /// Full-screen loading indicator using a Lottie animation.
 public struct LoadingView: View {
-    public init() {}
+    private let message: String
+    private let accessibilityText: String
+
+    public init(message: String, accessibilityText: String) {
+        self.message = message
+        self.accessibilityText = accessibilityText
+    }
 
     public var body: some View {
         VStack(spacing: 20) {
@@ -13,17 +18,17 @@ public struct LoadingView: View {
                 .frame(width: 200, height: 200)
                 .accessibilityHidden(true)
 
-            Text("loading.message".l10n(.ui))
+            Text(message)
                 .font(.body)
                 .foregroundStyle(.secondary)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .accessibilityLabel("loading.accessibility".l10n(.ui))
+        .accessibilityLabel(accessibilityText)
     }
 }
 
 #if DEBUG
 #Preview {
-    LoadingView()
+    LoadingView(message: "Loading races...", accessibilityText: "Loading races, please wait")
 }
 #endif

@@ -1,4 +1,3 @@
-import L10n_swift
 import SwiftUI
 import Model
 import ViewModels
@@ -15,19 +14,31 @@ public struct RaceListView: View {
         NavigationStack {
             Group {
                 if viewModel.isLoading && viewModel.visibleRaces.isEmpty {
-                    LoadingView()
+                    LoadingView(
+                        message: RaceListViewModel.loadingMessage,
+                        accessibilityText: RaceListViewModel.loadingAccessibilityLabel
+                    )
                 } else if let error = viewModel.error, viewModel.visibleRaces.isEmpty {
-                    ErrorView(error: error, onRetry: { viewModel.retry() })
+                    ErrorView(
+                        title: RaceListViewModel.errorTitle,
+                        errorDescription: error.localizedDescription,
+                        retryButtonText: RaceListViewModel.errorRetryButtonText,
+                        retryLabel: RaceListViewModel.errorRetryLabel,
+                        retryHint: RaceListViewModel.errorRetryHint,
+                        screenLabel: RaceListViewModel.errorScreenLabel(error: error),
+                        onRetry: { viewModel.retry() }
+                    )
                 } else {
                     raceList
                 }
             }
-            .navigationTitle("race.list.title".l10n(.ui))
+            .navigationTitle(RaceListViewModel.listTitle)
             #if os(iOS)
             .toolbarTitleDisplayMode(.large)
             #endif
             .safeAreaInset(edge: .top, spacing: 0) {
                 FilterBarView(
+                    accessibilityText: RaceListViewModel.filterBarAccessibilityLabel,
                     selectedCategories: Binding(
                         get: { viewModel.selectedCategories },
                         set: { _ in } // Changes go via toggleCategory only
@@ -47,24 +58,24 @@ public struct RaceListView: View {
 
     private var raceList: some View {
         List {
-            ForEach(viewModel.visibleRaces) { race in
-                RaceRowView(race: race)
+            ForEach(viewModel.visibleRaces) { rowVM in
+                RaceRowView(row: rowVM)
             }
         }
         .listStyle(.plain)
         .overlay {
             if viewModel.visibleRaces.isEmpty && !viewModel.isLoading {
                 ContentUnavailableView(
-                    "race.list.empty.title".l10n(.ui),
+                    RaceListViewModel.emptyTitle,
                     systemImage: "flag.checkered",
-                    description: Text("race.list.empty.description".l10n(.ui))
+                    description: Text(RaceListViewModel.emptyDescription)
                 )
             }
         }
         .refreshable {
             _ = await viewModel.fetchRaces()
         }
-        .accessibilityLabel("race.list.accessibility".l10n(.ui))
+        .accessibilityLabel(RaceListViewModel.listAccessibilityLabel)
     }
 }
 

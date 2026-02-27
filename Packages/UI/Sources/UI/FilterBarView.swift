@@ -1,16 +1,19 @@
-import L10n_swift
 import SwiftUI
 import Model
+import ViewModels
 
 /// A horizontal scroll bar of category toggle chips.
 public struct FilterBarView: View {
+    private let accessibilityText: String
     @Binding private var selectedCategories: Set<RaceCategory>
     private let onToggle: (RaceCategory) -> Void
 
     public init(
+        accessibilityText: String,
         selectedCategories: Binding<Set<RaceCategory>>,
         onToggle: @escaping (RaceCategory) -> Void
     ) {
+        self.accessibilityText = accessibilityText
         _selectedCategories = selectedCategories
         self.onToggle = onToggle
     }
@@ -29,7 +32,7 @@ public struct FilterBarView: View {
             .padding(.horizontal, 16)
             .padding(.vertical, 8)
         }
-        .accessibilityLabel("filter.bar.accessibility".l10n(.ui))
+        .accessibilityLabel(accessibilityText)
     }
 }
 
@@ -53,12 +56,8 @@ private struct CategoryChip: View {
                 .foregroundStyle(isSelected ? .white : .primary)
                 .animation(.easeInOut(duration: 0.2), value: isSelected)
         }
-        .accessibilityLabel("filter.chip.label".l10n(.ui, args: [category.localizedName]))
-        .accessibilityHint(
-            isSelected
-                ? "filter.chip.hint.remove".l10n(.ui)
-                : "filter.chip.hint.add".l10n(.ui, args: [category.localizedName])
-        )
+        .accessibilityLabel(category.chipAccessibilityLabel())
+        .accessibilityHint(category.chipAccessibilityHint(isSelected: isSelected))
         .accessibilityAddTraits(isSelected ? [.isSelected] : [])
     }
 }
@@ -66,6 +65,10 @@ private struct CategoryChip: View {
 #if DEBUG
 #Preview {
     @Previewable @State var selected: Set<RaceCategory> = [.horse]
-    FilterBarView(selectedCategories: $selected, onToggle: { _ in })
+    FilterBarView(
+        accessibilityText: "Category filter",
+        selectedCategories: $selected,
+        onToggle: { _ in }
+    )
 }
 #endif

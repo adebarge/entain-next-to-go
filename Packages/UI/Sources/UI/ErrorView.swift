@@ -1,14 +1,31 @@
-import L10n_swift
 import SwiftUI
 import Lottie
 
 /// Full-screen error state with a Lottie animation, message, and retry button.
 public struct ErrorView: View {
-    private let error: Error
+    private let title: String
+    private let errorDescription: String
+    private let retryButtonText: String
+    private let retryLabel: String
+    private let retryHint: String
+    private let screenLabel: String
     private let onRetry: () -> Void
 
-    public init(error: Error, onRetry: @escaping () -> Void) {
-        self.error = error
+    public init(
+        title: String,
+        errorDescription: String,
+        retryButtonText: String,
+        retryLabel: String,
+        retryHint: String,
+        screenLabel: String,
+        onRetry: @escaping () -> Void
+    ) {
+        self.title = title
+        self.errorDescription = errorDescription
+        self.retryButtonText = retryButtonText
+        self.retryLabel = retryLabel
+        self.retryHint = retryHint
+        self.screenLabel = screenLabel
         self.onRetry = onRetry
     }
 
@@ -20,10 +37,10 @@ public struct ErrorView: View {
                 .accessibilityHidden(true)
 
             VStack(spacing: 8) {
-                Text("error.title".l10n(.ui))
+                Text(title)
                     .font(.headline)
 
-                Text(error.localizedDescription)
+                Text(errorDescription)
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
@@ -31,24 +48,29 @@ public struct ErrorView: View {
             }
 
             Button(action: onRetry) {
-                Label("error.retry.button".l10n(.ui), systemImage: "arrow.clockwise")
+                Label(retryButtonText, systemImage: "arrow.clockwise")
                     .font(.body.weight(.semibold))
                     .padding(.horizontal, 24)
                     .padding(.vertical, 12)
             }
             .buttonStyle(.borderedProminent)
-            .accessibilityLabel("error.retry.label".l10n(.ui))
-            .accessibilityHint("error.retry.hint".l10n(.ui))
+            .accessibilityLabel(retryLabel)
+            .accessibilityHint(retryHint)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .accessibilityLabel("error.screen.label".l10n(.ui, args: [error.localizedDescription]))
+        .accessibilityLabel(screenLabel)
     }
 }
 
 #if DEBUG
 #Preview {
     ErrorView(
-        error: URLError(.notConnectedToInternet),
+        title: "Something went wrong",
+        errorDescription: URLError(.notConnectedToInternet).localizedDescription,
+        retryButtonText: "Try Again",
+        retryLabel: "Try again",
+        retryHint: "Retry loading races",
+        screenLabel: "Error: not connected. Tap 'Try Again' to retry.",
         onRetry: {}
     )
 }

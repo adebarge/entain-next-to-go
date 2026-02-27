@@ -1,67 +1,64 @@
-import L10n_swift
 import SwiftUI
-import Model
+import ViewModels
 
 /// A single row in the race list.
 public struct RaceRowView: View {
-    private let race: Race
+    private let row: RaceRowViewModel
 
-    public init(race: Race) {
-        self.race = race
+    public init(row: RaceRowViewModel) {
+        self.row = row
     }
 
     public var body: some View {
         HStack(alignment: .center, spacing: 12) {
             // Category icon
-            Image(systemName: race.category.sfSymbol)
+            Image(systemName: row.sfSymbol)
                 .font(.title2)
                 .foregroundStyle(Color.accentColor)
                 .frame(width: 36)
                 .accessibilityHidden(true)
 
             VStack(alignment: .leading, spacing: 2) {
-                Text(race.meetingName)
+                Text(row.meetingName)
                     .font(.headline)
                     .lineLimit(1)
 
-                Text("race.row.number".l10n(.ui, args: [race.raceNumber]))
+                Text(row.raceNumberText)
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }
 
             Spacer()
 
-            CountdownLabel(race: race)
+            CountdownLabel(row: row)
         }
         .padding(.vertical, 4)
         .contentShape(Rectangle())
         .accessibilityElement(children: .combine)
-        .accessibilityLabel(accessibilityDescription)
-        .accessibilityHint("race.row.hint".l10n(.ui, args: [race.raceNumber, race.meetingName]))
-    }
-
-    private var accessibilityDescription: String {
-        "race.row.label".l10n(.ui, args: [race.raceNumber, race.meetingName, race.category.localizedName])
+        .accessibilityLabel(row.accessibilityLabel)
+        .accessibilityHint(row.accessibilityHint)
     }
 }
 
 #if DEBUG
+import Model
+
 #Preview {
     List {
-        RaceRowView(race: Race(
+        RaceRowView(row: RaceRowViewModel(race: Race(
             id: "preview",
             meetingName: "Randwick",
             raceNumber: 3,
             advertisedStart: Date().addingTimeInterval(83),
             category: .horse
-        ))
-        RaceRowView(race: Race(
+        )))
+        RaceRowView(row: RaceRowViewModel(race: Race(
             id: "preview2",
             meetingName: "The Meadows",
             raceNumber: 7,
             advertisedStart: Date().addingTimeInterval(-30),
             category: .greyhound
-        ))
+        )))
     }
 }
 #endif

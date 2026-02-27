@@ -18,7 +18,7 @@ public final class RaceListViewModel {
 
     // MARK: - Public state (automatically observed via @Observable)
 
-    public var visibleRaces: [Race] = []
+    public var visibleRaces: [RaceRowViewModel] = []
     public var selectedCategories: Set<RaceCategory> = []
     public var isLoading: Bool = false
     public var error: Error?
@@ -32,6 +32,38 @@ public final class RaceListViewModel {
     private static let expiryInterval: TimeInterval = 60
     private static let visibleCount = 5
     private static let fetchCount = 10
+
+    // MARK: - Static localised strings (view-level labels)
+
+    public nonisolated static let listTitle = NSLocalizedString(
+        "race.list.title", bundle: .module, comment: "")
+    public nonisolated static let emptyTitle = NSLocalizedString(
+        "race.list.empty.title", bundle: .module, comment: "")
+    public nonisolated static let emptyDescription = NSLocalizedString(
+        "race.list.empty.description", bundle: .module, comment: "")
+    public nonisolated static let listAccessibilityLabel = NSLocalizedString(
+        "race.list.accessibility", bundle: .module, comment: "")
+    public nonisolated static let filterBarAccessibilityLabel = NSLocalizedString(
+        "filter.bar.accessibility", bundle: .module, comment: "")
+    public nonisolated static let loadingMessage = NSLocalizedString(
+        "loading.message", bundle: .module, comment: "")
+    public nonisolated static let loadingAccessibilityLabel = NSLocalizedString(
+        "loading.accessibility", bundle: .module, comment: "")
+    public nonisolated static let errorTitle = NSLocalizedString(
+        "error.title", bundle: .module, comment: "")
+    public nonisolated static let errorRetryButtonText = NSLocalizedString(
+        "error.retry.button", bundle: .module, comment: "")
+    public nonisolated static let errorRetryLabel = NSLocalizedString(
+        "error.retry.label", bundle: .module, comment: "")
+    public nonisolated static let errorRetryHint = NSLocalizedString(
+        "error.retry.hint", bundle: .module, comment: "")
+
+    public nonisolated static func errorScreenLabel(error: Error) -> String {
+        String(
+            format: NSLocalizedString("error.screen.label", bundle: .module, comment: ""),
+            error.localizedDescription
+        )
+    }
 
     // MARK: - Init
 
@@ -84,7 +116,7 @@ public final class RaceListViewModel {
             let now = Date()
             pruneExpired(now: now)
             applyFilter(now: now)
-            if visibleRaces.count < Self.visibleCount {
+            if visibleRaces.count <= Self.visibleCount {
                 await fetchRaces()
             }
         }
@@ -109,7 +141,7 @@ public final class RaceListViewModel {
         } else {
             filtered = active.filter { selectedCategories.contains($0.category) }
         }
-        visibleRaces = Array(filtered.prefix(Self.visibleCount))
+        visibleRaces = Array(filtered.prefix(Self.visibleCount)).map { RaceRowViewModel(race: $0) }
     }
 
     @discardableResult
