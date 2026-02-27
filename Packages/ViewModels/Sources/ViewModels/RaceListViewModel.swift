@@ -27,7 +27,6 @@ public final class RaceListViewModel {
 
     private var allRaces: [Race] = []
     private var tickTask: Task<Void, Never>?
-    private var retryTask: Task<Void, Never>?
     private let service: any RaceService
 
     private static let expiryInterval: TimeInterval = 60
@@ -88,14 +87,12 @@ public final class RaceListViewModel {
     public func stop() {
         tickTask?.cancel()
         tickTask = nil
-        retryTask?.cancel()
-        retryTask = nil
     }
 
     /// Retries after an error.
     public func retry() {
         error = nil
-        retryTask = Task { await fetchRaces() }
+        start()
     }
 
     // MARK: - Category filtering
@@ -150,9 +147,8 @@ public final class RaceListViewModel {
         visibleRaces = Array(filtered.prefix(Self.visibleCount)).map { RaceRowViewModel(race: $0) }
     }
 
-    @discardableResult
-    public func fetchRaces() async -> Bool {
-        guard !isLoading else { return false }
+    public func fetchRaces() async {
+        guard !isLoading else { return }
         isLoading = true
         defer { isLoading = false }
         do {
@@ -165,10 +161,9 @@ public final class RaceListViewModel {
             allRaces = (allRaces + newRaces).sorted { $0.advertisedStart < $1.advertisedStart }
             error = nil
             applyFilter(now: Date())
-            return true
         } catch {
             self.error = error
-            return false
+            stop()
         }
     }
 }

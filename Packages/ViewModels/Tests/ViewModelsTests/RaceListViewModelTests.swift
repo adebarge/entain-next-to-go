@@ -151,5 +151,33 @@ struct RaceListViewModelTests {
 
         #expect(vm.error == nil)
         #expect(!vm.visibleRaces.isEmpty)
+        vm.stop()
+    }
+
+    @Test("Error stops the tick loop; retry restarts it")
+    func errorStopsTickLoopAndRetryRestarts() async throws {
+        let mock = MockRaceService()
+        mock.shouldThrow = true
+        let vm = RaceListViewModel(service: mock)
+
+        vm.start()
+        try await Task.sleep(for: .milliseconds(100))
+
+        #expect(vm.error != nil)
+        let fetchCountAfterError = mock.fetchCount
+
+        // Wait longer than one tick interval — no additional fetches should occur
+        try await Task.sleep(for: .milliseconds(1_200))
+        #expect(mock.fetchCount == fetchCountAfterError)
+
+        // Retry should clear the error and trigger a new fetch
+        mock.shouldThrow = false
+        mock.racesToReturn = (1...5).map { Race.make(id: "r\($0)", raceNumber: $0) }
+        vm.retry()
+        try await Task.sleep(for: .milliseconds(100))
+
+        #expect(vm.error == nil)
+        #expect(!vm.visibleRaces.isEmpty)
+        vm.stop()
     }
 }
