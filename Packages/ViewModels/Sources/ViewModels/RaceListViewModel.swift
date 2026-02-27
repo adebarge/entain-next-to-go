@@ -53,6 +53,8 @@ public final class RaceListViewModel {
         "loading.accessibility", bundle: .module, comment: "")
     public nonisolated static let errorTitle = NSLocalizedString(
         "error.title", bundle: .module, comment: "")
+    public nonisolated static let errorMessage = NSLocalizedString(
+        "error.message.generic", bundle: .module, comment: "")
     public nonisolated static let errorRetryButtonText = NSLocalizedString(
         "error.retry.button", bundle: .module, comment: "")
     public nonisolated static let errorRetryLabel = NSLocalizedString(
@@ -60,12 +62,8 @@ public final class RaceListViewModel {
     public nonisolated static let errorRetryHint = NSLocalizedString(
         "error.retry.hint", bundle: .module, comment: "")
 
-    public nonisolated static func errorScreenLabel(error: Error) -> String {
-        String(
-            format: NSLocalizedString("error.screen.label", bundle: .module, comment: ""),
-            error.localizedDescription
-        )
-    }
+    public nonisolated static let errorScreenLabel = NSLocalizedString(
+        "error.screen.label", bundle: .module, comment: "")
 
     // MARK: - Init
 

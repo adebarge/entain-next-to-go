@@ -175,6 +175,18 @@ struct RaceListViewModelTests {
         #expect(vm.visibleRaces.isEmpty)
     }
 
+    @Test("Error copy is generic and user-friendly")
+    func usesGenericErrorMessage() {
+        #expect(RaceListViewModel.errorMessage == "We couldn't load races right now. Please try again.")
+        #expect(!RaceListViewModel.errorMessage.contains("NSURLErrorDomain"))
+    }
+
+    @Test("Error accessibility label is static and non-technical")
+    func usesStaticErrorScreenLabel() {
+        #expect(RaceListViewModel.errorScreenLabel == "Unable to load races. Tap 'Try Again' to retry.")
+        #expect(!RaceListViewModel.errorScreenLabel.contains("%@"))
+    }
+
     @Test("Retry clears error and re-fetches")
     func retryClears() async throws {
         let mock = MockRaceService()

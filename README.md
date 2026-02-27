@@ -7,7 +7,7 @@ An iOS app displaying the next 5 upcoming races from the Neds API, with live cou
 - **Live countdowns** — Updates every second using `TimelineView` (no ViewModel timer)
 - **Category filtering** — Filter by Horse, Harness, or Greyhound; deselect all to show everything
 - **Auto-refresh** — Expired races (>60s past start) are pruned; list auto-fills to 5
-- **Loading & Error states** — Lottie animations with retry support
+- **Loading & Error states** — Native SwiftUI animations with retry support and user-friendly generic error messaging
 - **Accessibility** — Full VoiceOver support, Dynamic Type, Voice Control labels
 
 ## Architecture
@@ -127,14 +127,6 @@ GET https://api.neds.com.au/rest/v1/racing/?method=nextraces&count=10
 - [ ] Persist cached races to survive app backgrounding (Core Data or SwiftData)
 - [ ] Support landscape and iPad layouts
 - [ ] Add haptic feedback on category toggle
-- [ ] Support `.dotlottie` format animations for smaller bundle size
 - [ ] Snapshot tests for `RaceRowView` and `FilterBarView`
 - [ ] Integration/UI tests using `XCTest` and live mock server
 - [ ] Localisation support (race categories, countdown labels)
-
-## Lottie Animations
-
-Placeholder animations are bundled (simple spinning arc for loading, pulsing circle for error). Replace with polished animations from [LottieFiles](https://lottiefiles.com) for production — the bundle resource paths are:
-
-- `racing_loading.json` — used by `LoadingView`
-- `error_animation.json` — used by `ErrorView`

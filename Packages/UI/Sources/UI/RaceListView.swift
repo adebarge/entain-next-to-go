@@ -18,14 +18,14 @@ public struct RaceListView: View {
                         message: RaceListViewModel.loadingMessage,
                         accessibilityText: RaceListViewModel.loadingAccessibilityLabel
                     )
-                } else if let error = viewModel.error, viewModel.visibleRaces.isEmpty {
+                } else if viewModel.error != nil, viewModel.visibleRaces.isEmpty {
                     ErrorView(
                         title: RaceListViewModel.errorTitle,
-                        errorDescription: error.localizedDescription,
+                        message: RaceListViewModel.errorMessage,
                         retryButtonText: RaceListViewModel.errorRetryButtonText,
                         retryLabel: RaceListViewModel.errorRetryLabel,
                         retryHint: RaceListViewModel.errorRetryHint,
-                        screenLabel: RaceListViewModel.errorScreenLabel(error: error),
+                        screenLabel: RaceListViewModel.errorScreenLabel,
                         onRetry: { viewModel.retry() }
                     )
                 } else {

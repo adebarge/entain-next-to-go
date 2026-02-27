@@ -9,21 +9,16 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "../Model"),
-        .package(path: "../ViewModels"),
-        .package(url: "https://github.com/airbnb/lottie-ios", from: "4.5.0")
+        .package(path: "../ViewModels")
     ],
     targets: [
         .target(
             name: "UI",
             dependencies: [
                 "Model",
-                "ViewModels",
-                .product(name: "Lottie", package: "lottie-ios")
+                "ViewModels"
             ],
-            path: "Sources/UI",
-            resources: [
-                .process("Resources")
-            ]
+            path: "Sources/UI"
         )
     ]
 )

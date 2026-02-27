@@ -1,10 +1,9 @@
 import SwiftUI
-import Lottie
 
-/// Full-screen error state with a Lottie animation, message, and retry button.
+/// Full-screen error state with a native SwiftUI animation, message, and retry button.
 public struct ErrorView: View {
     private let title: String
-    private let errorDescription: String
+    private let message: String
     private let retryButtonText: String
     private let retryLabel: String
     private let retryHint: String
@@ -13,7 +12,7 @@ public struct ErrorView: View {
 
     public init(
         title: String,
-        errorDescription: String,
+        message: String,
         retryButtonText: String,
         retryLabel: String,
         retryHint: String,
@@ -21,7 +20,7 @@ public struct ErrorView: View {
         onRetry: @escaping () -> Void
     ) {
         self.title = title
-        self.errorDescription = errorDescription
+        self.message = message
         self.retryButtonText = retryButtonText
         self.retryLabel = retryLabel
         self.retryHint = retryHint
@@ -31,16 +30,24 @@ public struct ErrorView: View {
 
     public var body: some View {
         VStack(spacing: 24) {
-            LottieView(animation: .named("error_animation", bundle: .module))
-                .playing(loopMode: .loop)
-                .frame(width: 180, height: 180)
-                .accessibilityHidden(true)
+            ZStack {
+                Circle()
+                    .fill(Color(red: 0.95, green: 0.24, blue: 0.22))
+                    .frame(width: 132, height: 132)
+
+                Image(systemName: "exclamationmark")
+                    .font(.system(size: 56, weight: .bold))
+                    .foregroundStyle(.white)
+                    .offset(y: -2)
+            }
+            .frame(width: 180, height: 180)
+            .accessibilityHidden(true)
 
             VStack(spacing: 8) {
                 Text(title)
                     .font(.headline)
 
-                Text(errorDescription)
+                Text(message)
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
@@ -66,11 +73,11 @@ public struct ErrorView: View {
 #Preview {
     ErrorView(
         title: "Something went wrong",
-        errorDescription: URLError(.notConnectedToInternet).localizedDescription,
+        message: "We couldn't load races right now. Please try again.",
         retryButtonText: "Try Again",
         retryLabel: "Try again",
         retryHint: "Retry loading races",
-        screenLabel: "Error: not connected. Tap 'Try Again' to retry.",
+        screenLabel: "Unable to load races. Tap 'Try Again' to retry.",
         onRetry: {}
     )
 }

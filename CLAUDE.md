@@ -16,7 +16,7 @@ Model ← ViewModels ← UI ← App
 - **Model** — Domain types (`Race`, `RaceCategory`), `RaceService` protocol, `CountdownFormatter`
 - **Services** — `NetworkService` actor, `DefaultRaceService`, API DTOs
 - **ViewModels** — `RaceListViewModel` (`@Observable`, `@MainActor`)
-- **UI** — All SwiftUI views, Lottie animations
+- **UI** — All SwiftUI views and native animations
 - **App** — Entry point, dependency injection
 
 ## Key Conventions
@@ -65,10 +65,6 @@ swiftlint --config .swiftlint.yml
 - `RaceListViewModelTests` — uses `MockRaceService`, covers filtering, expiry, refill, error handling
 - `@MainActor` isolation on the ViewModel requires tests to be `@MainActor` too
 
-## Lottie Animations
+## UI Animations
 
-Placeholder animations are included at:
-- `Packages/UI/Sources/UI/Resources/racing_loading.json`
-- `Packages/UI/Sources/UI/Resources/error_animation.json`
-
-Replace with proper Lottie files (e.g. from lottiefiles.com) for production.
+Loading and error screens use native SwiftUI animation primitives and SF Symbols.

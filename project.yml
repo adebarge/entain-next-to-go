@@ -23,9 +23,6 @@ packages:
     path: Packages/ViewModels
   UI:
     path: Packages/UI
-  Lottie:
-    url: https://github.com/airbnb/lottie-ios
-    from: "4.5.0"
   SwiftLint:
     url: https://github.com/realm/SwiftLint
     from: "0.57.0"
