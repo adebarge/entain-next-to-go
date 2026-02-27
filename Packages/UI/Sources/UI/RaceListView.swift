@@ -34,7 +34,7 @@ public struct RaceListView: View {
             }
             .navigationTitle(RaceListViewModel.listTitle)
             #if os(iOS)
-            .toolbarTitleDisplayMode(.large)
+            .toolbarTitleDisplayMode(.inline)
             #endif
             .safeAreaInset(edge: .top, spacing: 0) {
                 FilterBarView(
