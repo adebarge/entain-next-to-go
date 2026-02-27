@@ -18,6 +18,28 @@ final class MockRaceService: RaceService {
     }
 }
 
+actor BlockingRaceService: RaceService {
+    private var started = false
+
+    func fetchNextRaces(count: Int) async throws -> [Race] {
+        started = true
+        try await Task.sleep(for: .seconds(5))
+        return []
+    }
+
+    func waitUntilStarted(timeout: Duration = .seconds(2)) async throws {
+        let deadline = ContinuousClock.now.advanced(by: timeout)
+        while !started {
+            guard ContinuousClock.now < deadline else {
+                throw TimeoutError()
+            }
+            await Task.yield()
+        }
+    }
+
+    private struct TimeoutError: Error {}
+}
+
 // MARK: - Helpers
 
 extension Race {
@@ -113,19 +135,23 @@ struct RaceListViewModelTests {
         #expect(visible.contains(where: { $0.id == "future" }))
     }
 
-    @Test("Triggers a refetch when visible races fall below 5 after expiry")
-    func refetchesWhenBelowFive() async throws {
+    @Test("Throttles refetches when visible races stay below 5")
+    func throttlesRefetchWhenBelowFive() async throws {
         let mock = MockRaceService()
         // First fetch: 3 races (below threshold of 5)
         mock.racesToReturn = (1...3).map { Race.make(id: "r\($0)", raceNumber: $0) }
-        let vm = RaceListViewModel(service: mock)
+        let vm = RaceListViewModel(service: mock, minimumFetchInterval: 2)
         defer { vm.stop() }
 
         vm.start()
         try await waitUntil { mock.fetchCount >= 1 && vm.visibleRaces.count == 3 }
         let firstFetchCount = mock.fetchCount
 
-        // Second fetch: provide 5 more
+        // Wait less than throttle interval; should not fetch yet.
+        try await Task.sleep(for: .milliseconds(900))
+        #expect(mock.fetchCount == firstFetchCount)
+
+        // After interval elapses, next tick should trigger refetch.
         mock.racesToReturn = (4...8).map { Race.make(id: "r\($0)", raceNumber: $0) }
         try await waitUntil(timeout: .seconds(4)) {
             mock.fetchCount > firstFetchCount && vm.visibleRaces.count == 5
@@ -193,6 +219,45 @@ struct RaceListViewModelTests {
 
         #expect(vm.error == nil)
         #expect(!vm.visibleRaces.isEmpty)
+    }
+
+    @Test("Stop during in-flight fetch does not surface cancellation as error")
+    func stopDoesNotSurfaceCancellation() async throws {
+        let service = BlockingRaceService()
+        let vm = RaceListViewModel(service: service)
+
+        vm.start()
+        try await service.waitUntilStarted()
+        vm.stop()
+        try await Task.sleep(for: .milliseconds(200))
+
+        #expect(vm.error == nil)
+    }
+
+    @Test("Upserts existing race when API returns same id with updated values")
+    func upsertsExistingRace() async throws {
+        let mock = MockRaceService()
+        let now = Date.now
+        mock.racesToReturn = [
+            Race.make(id: "same-id", meetingName: "Old Meeting", raceNumber: 1, start: now.addingTimeInterval(300))
+        ]
+
+        let vm = RaceListViewModel(service: mock, minimumFetchInterval: 0)
+        defer { vm.stop() }
+
+        vm.start()
+        try await waitUntil { vm.visibleRaces.first?.meetingName == "Old Meeting" }
+
+        mock.racesToReturn = [
+            Race.make(id: "same-id", meetingName: "Updated Meeting", raceNumber: 7, start: Date.now.addingTimeInterval(120))
+        ]
+
+        try await waitUntil(timeout: .seconds(4)) {
+            vm.visibleRaces.first?.meetingName == "Updated Meeting"
+        }
+
+        #expect(vm.visibleRaces.first?.meetingName == "Updated Meeting")
+        #expect(vm.visibleRaces.first?.raceNumberText == "Race 7")
     }
 }
 

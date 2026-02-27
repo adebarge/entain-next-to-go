@@ -15,6 +15,11 @@ let package = Package(
             name: "Services",
             dependencies: ["Model"],
             path: "Sources/Services"
+        ),
+        .testTarget(
+            name: "ServicesTests",
+            dependencies: ["Services", "Model"],
+            path: "Tests/ServicesTests"
         )
     ]
 )

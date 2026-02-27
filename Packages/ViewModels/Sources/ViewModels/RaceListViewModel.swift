@@ -32,10 +32,13 @@ public final class RaceListViewModel {
     private var allRaces: [Race] = []
     private var tickTask: Task<Void, Never>?
     private let service: any RaceService
+    private let minimumFetchInterval: TimeInterval
+    private var lastFetchAt: Date?
 
     private static let expiryInterval: TimeInterval = 60
     private static let visibleCount = 5
     private static let fetchCount = 10
+    private static let defaultMinimumFetchInterval: TimeInterval = 20
 
     // MARK: - Static localised strings (view-level labels)
 
@@ -71,8 +74,13 @@ public final class RaceListViewModel {
 
     // MARK: - Init
 
-    public init(service: any RaceService) {
+    public convenience init(service: any RaceService) {
+        self.init(service: service, minimumFetchInterval: Self.defaultMinimumFetchInterval)
+    }
+
+    init(service: any RaceService, minimumFetchInterval: TimeInterval) {
         self.service = service
+        self.minimumFetchInterval = minimumFetchInterval
     }
 
     // MARK: - Lifecycle
@@ -82,7 +90,7 @@ public final class RaceListViewModel {
     public func start() {
         guard tickTask == nil else { return }
         tickTask = Task { [weak self] in
-            await self?.fetchRaces()
+            await self?.fetchRaces(force: true)
             await self?.runTickLoop()
         }
     }
@@ -96,6 +104,7 @@ public final class RaceListViewModel {
     /// Retries after an error.
     public func retry() {
         error = nil
+        lastFetchAt = nil
         start()
     }
 
@@ -108,7 +117,7 @@ public final class RaceListViewModel {
         } else {
             selectedCategories.insert(category)
         }
-        applyFilter(now: Date())
+        applyFilter(since: .now)
     }
 }
 
@@ -123,27 +132,27 @@ private extension RaceListViewModel {
             } catch {
                 break
             }
-            let now = Date()
-            pruneExpired(now: now)
-            applyFilter(now: now)
-            if visibleRaces.count < Self.visibleCount {
+            let now = Date.now
+            pruneExpired(since: now)
+            applyFilter(since: now)
+            if shouldFetch(since: now) {
                 await fetchRaces()
             }
         }
     }
 
     /// Remove races that started more than 60 seconds ago.
-    func pruneExpired(now: Date) {
+    func pruneExpired(since date: Date) {
         allRaces = allRaces.filter { race in
-            race.advertisedStart.timeIntervalSince(now) > -Self.expiryInterval
+            race.advertisedStart.timeIntervalSince(date) > -Self.expiryInterval
         }
     }
 
     /// Apply expiry + category filter and pick the first 5 races.
-    func applyFilter(now: Date) {
+    func applyFilter(since date: Date) {
         // Always exclude races past the expiry window for the visible list
         let active = allRaces.filter {
-            $0.advertisedStart.timeIntervalSince(now) > -Self.expiryInterval
+            $0.advertisedStart.timeIntervalSince(date) > -Self.expiryInterval
         }
         let filtered: [Race]
         if selectedCategories.isEmpty {
@@ -154,20 +163,33 @@ private extension RaceListViewModel {
         visibleRaces = Array(filtered.prefix(Self.visibleCount)).map { RaceRowViewModel(race: $0) }
     }
 
-    func fetchRaces() async {
+    func shouldFetch(since date: Date) -> Bool {
+        guard visibleRaces.count < Self.visibleCount else { return false }
+        guard let lastFetchAt else { return true }
+        return date.timeIntervalSince(lastFetchAt) >= minimumFetchInterval
+    }
+
+    func fetchRaces(force: Bool = false) async {
         guard !isLoading else { return }
+        let now = Date.now
+        guard force || shouldFetch(since: now) else { return }
+        lastFetchAt = now
         isLoading = true
         defer { isLoading = false }
         do {
             let fetched = try await service.fetchNextRaces(count: Self.fetchCount)
             // Prune stale races before merging to avoid surfacing expired entries
-            pruneExpired(now: Date())
-            // Merge without duplicates, keeping existing races and appending new ones
-            let existingIds = Set(allRaces.map(\.id))
-            let newRaces = fetched.filter { !existingIds.contains($0.id) }
-            allRaces = (allRaces + newRaces).sorted { $0.advertisedStart < $1.advertisedStart }
+            pruneExpired(since: .now)
+            // Upsert by ID so existing races are refreshed when API data changes.
+            var racesById = Dictionary(uniqueKeysWithValues: allRaces.map { ($0.id, $0) })
+            for race in fetched {
+                racesById[race.id] = race
+            }
+            allRaces = racesById.values.sorted { $0.advertisedStart < $1.advertisedStart }
             error = nil
-            applyFilter(now: Date())
+            applyFilter(since: .now)
+        } catch is CancellationError {
+            return
         } catch {
             self.error = error
             stop()
