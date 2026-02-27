@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>StringsTable</key>
+	<string>Root</string>
+	<key>PreferenceSpecifiers</key>
+	<array>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Developer</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSRadioGroupSpecifier</string>
+			<key>Title</key>
+			<string>Data Source</string>
+			<key>Key</key>
+			<string>app_mode</string>
+			<key>DefaultValue</key>
+			<string>live</string>
+			<key>Values</key>
+			<array>
+				<string>live</string>
+				<string>demo</string>
+			</array>
+			<key>Titles</key>
+			<array>
+				<string>Live</string>
+				<string>Demo</string>
+			</array>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Demo Overrides</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Simulate Error</string>
+			<key>Key</key>
+			<string>demo_simulate_error</string>
+			<key>DefaultValue</key>
+			<false/>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Loading Delay (s)</string>
+			<key>Key</key>
+			<string>demo_loading_delay</string>
+			<key>IsSecure</key>
+			<false/>
+			<key>KeyboardType</key>
+			<string>NumberPad</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Timing</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Expiry Interval (s)</string>
+			<key>Key</key>
+			<string>vm_expiry_interval</string>
+			<key>KeyboardType</key>
+			<string>NumberPad</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Min Fetch Interval (s)</string>
+			<key>Key</key>
+			<string>vm_min_fetch_interval</string>
+			<key>KeyboardType</key>
+			<string>NumberPad</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Visible Count</string>
+			<key>Key</key>
+			<string>vm_visible_count</string>
+			<key>KeyboardType</key>
+			<string>NumberPad</string>
+		</dict>
+	</array>
+</dict>
+</plist>

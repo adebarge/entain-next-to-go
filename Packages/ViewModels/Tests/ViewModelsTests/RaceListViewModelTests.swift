@@ -140,7 +140,7 @@ struct RaceListViewModelTests {
         let mock = MockRaceService()
         // First fetch: 3 races (below threshold of 5)
         mock.racesToReturn = (1...3).map { Race.make(id: "r\($0)", raceNumber: $0) }
-        let vm = RaceListViewModel(service: mock, minimumFetchInterval: 2)
+        let vm = RaceListViewModel(service: mock, configuration: RaceListConfiguration(minimumFetchInterval: 2))
         defer { vm.stop() }
 
         vm.start()
@@ -242,7 +242,7 @@ struct RaceListViewModelTests {
             Race.make(id: "same-id", meetingName: "Old Meeting", raceNumber: 1, start: now.addingTimeInterval(300))
         ]
 
-        let vm = RaceListViewModel(service: mock, minimumFetchInterval: 0)
+        let vm = RaceListViewModel(service: mock, configuration: RaceListConfiguration(minimumFetchInterval: 0))
         defer { vm.stop() }
 
         vm.start()

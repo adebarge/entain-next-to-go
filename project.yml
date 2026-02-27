@@ -39,6 +39,7 @@ targets:
       - path: Entain
     resources:
       - path: Entain/Assets.xcassets
+      - path: Entain/Settings.bundle
     info:
       path: Entain/Info.plist
       properties:
@@ -54,6 +55,8 @@ targets:
         NSAppTransportSecurity:
           NSAllowsArbitraryLoads: false
     dependencies:
+      - package: Model
+        product: Model
       - package: UI
         product: UI
       - package: Services

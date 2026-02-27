@@ -5,10 +5,10 @@ import Observation
 /// The view-model for the "Next to Go" race list.
 ///
 /// - Owns a 1-second tick loop that:
-///   1. Prunes races that started more than 60 seconds ago.
+///   1. Prunes races that started more than `configuration.expiryInterval` seconds ago.
 ///   2. Applies the selected category filter (empty set = all categories).
-///   3. Exposes the first 5 matching races as `visibleRaces`.
-///   4. Triggers a network refresh when fewer than 5 races are visible.
+///   3. Exposes the first `configuration.visibleCount` matching races as `visibleRaces`.
+///   4. Triggers a network refresh when fewer than `configuration.visibleCount` races are visible.
 ///
 /// - Countdown rendering is a View concern: use `CountdownLabel` (wrapping
 ///   `TimelineView(.everySecond)`) — no timer lives here for display purposes.
@@ -32,13 +32,8 @@ public final class RaceListViewModel {
     private var allRaces: [Race] = []
     private var tickTask: Task<Void, Never>?
     private let service: any RaceService
-    private let minimumFetchInterval: TimeInterval
+    private let configuration: RaceListConfiguration
     private var lastFetchAt: Date?
-
-    private static let expiryInterval: TimeInterval = 60
-    private static let visibleCount = 5
-    private static let fetchCount = 10
-    private static let defaultMinimumFetchInterval: TimeInterval = 20
 
     // MARK: - Static localised strings (view-level labels)
 
@@ -74,13 +69,9 @@ public final class RaceListViewModel {
 
     // MARK: - Init
 
-    public convenience init(service: any RaceService) {
-        self.init(service: service, minimumFetchInterval: Self.defaultMinimumFetchInterval)
-    }
-
-    init(service: any RaceService, minimumFetchInterval: TimeInterval) {
+    public init(service: any RaceService, configuration: RaceListConfiguration = .default) {
         self.service = service
-        self.minimumFetchInterval = minimumFetchInterval
+        self.configuration = configuration
     }
 
     // MARK: - Lifecycle
@@ -141,18 +132,18 @@ private extension RaceListViewModel {
         }
     }
 
-    /// Remove races that started more than 60 seconds ago.
+    /// Remove races that started more than `configuration.expiryInterval` seconds ago.
     func pruneExpired(since date: Date) {
         allRaces = allRaces.filter { race in
-            race.advertisedStart.timeIntervalSince(date) > -Self.expiryInterval
+            race.advertisedStart.timeIntervalSince(date) > -configuration.expiryInterval
         }
     }
 
-    /// Apply expiry + category filter and pick the first 5 races.
+    /// Apply expiry + category filter and pick the first `configuration.visibleCount` races.
     func applyFilter(since date: Date) {
         // Always exclude races past the expiry window for the visible list
         let active = allRaces.filter {
-            $0.advertisedStart.timeIntervalSince(date) > -Self.expiryInterval
+            $0.advertisedStart.timeIntervalSince(date) > -configuration.expiryInterval
         }
         let filtered: [Race]
         if selectedCategories.isEmpty {
@@ -160,13 +151,13 @@ private extension RaceListViewModel {
         } else {
             filtered = active.filter { selectedCategories.contains($0.category) }
         }
-        visibleRaces = Array(filtered.prefix(Self.visibleCount)).map { RaceRowViewModel(race: $0) }
+        visibleRaces = Array(filtered.prefix(configuration.visibleCount)).map { RaceRowViewModel(race: $0) }
     }
 
     func shouldFetch(since date: Date) -> Bool {
-        guard visibleRaces.count < Self.visibleCount else { return false }
+        guard visibleRaces.count < configuration.visibleCount else { return false }
         guard let lastFetchAt else { return true }
-        return date.timeIntervalSince(lastFetchAt) >= minimumFetchInterval
+        return date.timeIntervalSince(lastFetchAt) >= configuration.minimumFetchInterval
     }
 
     func fetchRaces(force: Bool = false) async {
@@ -177,7 +168,7 @@ private extension RaceListViewModel {
         isLoading = true
         defer { isLoading = false }
         do {
-            let fetched = try await service.fetchNextRaces(count: Self.fetchCount)
+            let fetched = try await service.fetchNextRaces(count: configuration.fetchCount)
             // Prune stale races before merging to avoid surfacing expired entries
             pruneExpired(since: .now)
             // Upsert by ID so existing races are refreshed when API data changes.
