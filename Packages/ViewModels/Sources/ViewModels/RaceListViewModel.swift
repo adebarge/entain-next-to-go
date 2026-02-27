@@ -27,6 +27,7 @@ public final class RaceListViewModel {
 
     private var allRaces: [Race] = []
     private var tickTask: Task<Void, Never>?
+    private var retryTask: Task<Void, Never>?
     private let service: any RaceService
 
     private static let expiryInterval: TimeInterval = 60
@@ -74,7 +75,7 @@ public final class RaceListViewModel {
     // MARK: - Lifecycle
 
     /// Starts the tick loop and triggers an initial fetch.
-    /// Call from `.task` or `.onAppear`.
+    /// Call from `.onAppear`.
     public func start() {
         guard tickTask == nil else { return }
         tickTask = Task { [weak self] in
@@ -87,12 +88,14 @@ public final class RaceListViewModel {
     public func stop() {
         tickTask?.cancel()
         tickTask = nil
+        retryTask?.cancel()
+        retryTask = nil
     }
 
     /// Retries after an error.
     public func retry() {
         error = nil
-        Task { await fetchRaces() }
+        retryTask = Task { await fetchRaces() }
     }
 
     // MARK: - Category filtering
@@ -111,12 +114,15 @@ public final class RaceListViewModel {
 
     private func runTickLoop() async {
         while !Task.isCancelled {
-            try? await Task.sleep(for: .seconds(1))
-            guard !Task.isCancelled else { break }
+            do {
+                try await Task.sleep(for: .seconds(1))
+            } catch {
+                break
+            }
             let now = Date()
             pruneExpired(now: now)
             applyFilter(now: now)
-            if visibleRaces.count <= Self.visibleCount {
+            if visibleRaces.count < Self.visibleCount {
                 await fetchRaces()
             }
         }
@@ -151,6 +157,8 @@ public final class RaceListViewModel {
         defer { isLoading = false }
         do {
             let fetched = try await service.fetchNextRaces(count: Self.fetchCount)
+            // Prune stale races before merging to avoid surfacing expired entries
+            pruneExpired(now: Date())
             // Merge without duplicates, keeping existing races and appending new ones
             let existingIds = Set(allRaces.map(\.id))
             let newRaces = fetched.filter { !existingIds.contains($0.id) }

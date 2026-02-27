@@ -5,16 +5,16 @@ import ViewModels
 /// A horizontal scroll bar of category toggle chips.
 public struct FilterBarView: View {
     private let accessibilityText: String
-    @Binding private var selectedCategories: Set<RaceCategory>
+    private let selectedCategories: Set<RaceCategory>
     private let onToggle: (RaceCategory) -> Void
 
     public init(
         accessibilityText: String,
-        selectedCategories: Binding<Set<RaceCategory>>,
+        selectedCategories: Set<RaceCategory>,
         onToggle: @escaping (RaceCategory) -> Void
     ) {
         self.accessibilityText = accessibilityText
-        _selectedCategories = selectedCategories
+        self.selectedCategories = selectedCategories
         self.onToggle = onToggle
     }
 
@@ -67,7 +67,7 @@ private struct CategoryChip: View {
     @Previewable @State var selected: Set<RaceCategory> = [.horse]
     FilterBarView(
         accessibilityText: "Category filter",
-        selectedCategories: $selected,
+        selectedCategories: selected,
         onToggle: { _ in }
     )
 }

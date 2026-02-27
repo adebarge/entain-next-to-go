@@ -21,6 +21,7 @@ public enum NetworkError: Error, LocalizedError {
 /// A concurrency-safe wrapper around `URLSession` for making HTTP requests.
 public actor NetworkService {
     private let session: URLSession
+    private let decoder = JSONDecoder()
 
     public init(session: URLSession = .shared) {
         self.session = session
@@ -36,7 +37,7 @@ public actor NetworkService {
             throw NetworkError.httpError(statusCode: httpResponse.statusCode)
         }
         do {
-            return try JSONDecoder().decode(type, from: data)
+            return try decoder.decode(type, from: data)
         } catch {
             throw NetworkError.decodingFailed(error)
         }

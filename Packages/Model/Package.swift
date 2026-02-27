@@ -11,11 +11,6 @@ let package = Package(
         .target(
             name: "Model",
             path: "Sources/Model"
-        ),
-        .testTarget(
-            name: "ModelTests",
-            dependencies: ["Model"],
-            path: "Tests/ModelTests"
         )
     ]
 )

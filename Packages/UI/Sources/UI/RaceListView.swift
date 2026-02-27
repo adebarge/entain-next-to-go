@@ -39,16 +39,13 @@ public struct RaceListView: View {
             .safeAreaInset(edge: .top, spacing: 0) {
                 FilterBarView(
                     accessibilityText: RaceListViewModel.filterBarAccessibilityLabel,
-                    selectedCategories: Binding(
-                        get: { viewModel.selectedCategories },
-                        set: { _ in } // Changes go via toggleCategory only
-                    ),
+                    selectedCategories: viewModel.selectedCategories,
                     onToggle: { viewModel.toggleCategory($0) }
                 )
                 .background(.bar)
             }
         }
-        .task {
+        .onAppear {
             viewModel.start()
         }
         .onDisappear {

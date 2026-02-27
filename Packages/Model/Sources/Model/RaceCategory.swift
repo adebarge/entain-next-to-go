@@ -17,15 +17,6 @@ public enum RaceCategory: String, CaseIterable, Identifiable, Sendable {
         }
     }
 
-    /// A human-readable display name for the category.
-    public var displayName: String {
-        switch self {
-        case .horse:      return "Horse"
-        case .harness:    return "Harness"
-        case .greyhound:  return "Greyhound"
-        }
-    }
-
     /// An SF Symbol name appropriate for this category.
     public var sfSymbol: String {
         switch self {

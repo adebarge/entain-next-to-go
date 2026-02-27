@@ -5,7 +5,8 @@ import Model
 
 // MARK: - Mock
 
-final class MockRaceService: RaceService, @unchecked Sendable {
+@MainActor
+final class MockRaceService: RaceService {
     var racesToReturn: [Race] = []
     var shouldThrow: Bool = false
     var fetchCount: Int = 0
