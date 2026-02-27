@@ -64,8 +64,14 @@ xcodebuild test -project Entain.xcodeproj -scheme Entain \
   -destination "platform=iOS Simulator,name=iPhone 17" \
   CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
 
-# Package-level tests (faster, no simulator needed)
+# Package-level tests (direct package run, optional)
 swift test --package-path Packages/ViewModels
+```
+
+## Regenerate Xcode Project
+
+```bash
+xcodegen generate
 ```
 
 ## Testing Checklist
@@ -91,7 +97,7 @@ swift test --package-path Packages/ViewModels
 | Run | `Cmd+R` → app shows 5 live races |
 | Filter | Tap category chip → list filters |
 | Expiry | Use `MockRaceService` with expired start date |
-| Tests | Run `swift test --package-path Packages/ViewModels` and `xcodebuild test ...` |
+| Tests | Run `xcodebuild test ...` (includes package tests) and/or direct `swift test --package-path ...` |
 | VoiceOver | Enable in Simulator → race rows announce full info |
 | Dynamic Type | Increase text size → layout adapts |
 | SwiftLint | Build log shows 0 violations |

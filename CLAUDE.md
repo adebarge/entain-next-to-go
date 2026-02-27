@@ -38,8 +38,12 @@ xcodebuild build -project Entain.xcodeproj -scheme Entain \
   -destination "platform=iOS Simulator,name=iPhone 16" \
   CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
 
-# Run package tests
-swift test --package-path Packages/Model
+# Run all tests from Entain scheme
+xcodebuild test -project Entain.xcodeproj -scheme Entain \
+  -destination "platform=iOS Simulator,name=iPhone 16" \
+  CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+
+# Run package tests directly (optional)
 swift test --package-path Packages/ViewModels
 ```
 

@@ -7,12 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D3C575129B3AE1929E27707 /* UI in Frameworks */ = {isa = PBXBuildFile; productRef = 6407145267D97688062F34BA /* UI */; };
 		2B783F8B9DD7A6D5AEC05820 /* ViewModels in Frameworks */ = {isa = PBXBuildFile; productRef = D0F2C07F173A85483C87CB53 /* ViewModels */; };
+		2CD859A3385B392FA099FA7C /* Model in Frameworks */ = {isa = PBXBuildFile; productRef = 2DAEB7E72F515081EED4A83B /* Model */; };
 		7344E829B58DFE15E4687E23 /* UI in Frameworks */ = {isa = PBXBuildFile; productRef = 89F36DB107B3B5659AAED463 /* UI */; };
 		90AC2CFC1B5A9FC99BB40153 /* Services in Frameworks */ = {isa = PBXBuildFile; productRef = DFAA44421D4BEC0007DFAA06 /* Services */; };
 		9822AFD4448D84C19DF86715 /* EntainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839D48716579721250859332 /* EntainApp.swift */; };
 		9E890E573012CA349CC7885A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE182E18CB2EEF336323B9DA /* Assets.xcassets */; };
 		9F2675D4863845C24145EEA0 /* EntainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D768D7F9EA37F48FE55FB7 /* EntainTests.swift */; };
+		AEB1F2BA987886E53516AD96 /* ViewModels in Frameworks */ = {isa = PBXBuildFile; productRef = 141463D9F02D4DB5DDD1D545 /* ViewModels */; };
+		DE47F0792C36CA9C9B665848 /* RaceRowViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E813847C5B2ADC23CC1F2B9 /* RaceRowViewModelTests.swift */; };
+		E80759593EEDC71AC1C70C6B /* RaceListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE8C682487D00DE2E8E819C /* RaceListViewModelTests.swift */; };
+		F05EB9F6004F4E3F527E573A /* Services in Frameworks */ = {isa = PBXBuildFile; productRef = 29F94F211E01BA64053599AE /* Services */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,6 +34,8 @@
 /* Begin PBXFileReference section */
 		01BCF47B642E81DE723710AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		839D48716579721250859332 /* EntainApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntainApp.swift; sourceTree = "<group>"; };
+		8BE8C682487D00DE2E8E819C /* RaceListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceListViewModelTests.swift; sourceTree = "<group>"; };
+		8E813847C5B2ADC23CC1F2B9 /* RaceRowViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceRowViewModelTests.swift; sourceTree = "<group>"; };
 		90D768D7F9EA37F48FE55FB7 /* EntainTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntainTests.swift; sourceTree = "<group>"; };
 		9C915CAB0CF3102CD1F7CE17 /* UI */ = {isa = PBXFileReference; lastKnownFileType = folder; name = UI; path = Packages/UI; sourceTree = SOURCE_ROOT; };
 		B8834281061166837382ED32 /* Entain.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Entain.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -39,6 +47,17 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		AC1315A2B4955A9FB77494DA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AEB1F2BA987886E53516AD96 /* ViewModels in Frameworks */,
+				2CD859A3385B392FA099FA7C /* Model in Frameworks */,
+				F05EB9F6004F4E3F527E573A /* Services in Frameworks */,
+				1D3C575129B3AE1929E27707 /* UI in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BBA572F206E0BDD05D12ADBD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -69,6 +88,7 @@
 				F0D32F3C1035EC06DAD7CDC1 /* Services */,
 				9C915CAB0CF3102CD1F7CE17 /* UI */,
 				DC785A094EF9F856DEFD811E /* ViewModels */,
+				AC10EF508C8718931BDF57FE /* ViewModels */,
 			);
 			path = Packages;
 			sourceTree = "<group>";
@@ -92,12 +112,37 @@
 			);
 			sourceTree = "<group>";
 		};
+		98A93DEA564AC28C9FB41E82 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				FF97D20F1967565009F509BA /* ViewModelsTests */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		AC10EF508C8718931BDF57FE /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				98A93DEA564AC28C9FB41E82 /* Tests */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		F9F6DFD4402BD22BD8C4987C /* EntainTests */ = {
 			isa = PBXGroup;
 			children = (
 				90D768D7F9EA37F48FE55FB7 /* EntainTests.swift */,
 			);
 			path = EntainTests;
+			sourceTree = "<group>";
+		};
+		FF97D20F1967565009F509BA /* ViewModelsTests */ = {
+			isa = PBXGroup;
+			children = (
+				8BE8C682487D00DE2E8E819C /* RaceListViewModelTests.swift */,
+				8E813847C5B2ADC23CC1F2B9 /* RaceRowViewModelTests.swift */,
+			);
+			path = ViewModelsTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -108,6 +153,7 @@
 			buildConfigurationList = F97E8C385BE4FDA7FC26869F /* Build configuration list for PBXNativeTarget "EntainTests" */;
 			buildPhases = (
 				EEB258EC405CFB5BC01C0BDB /* Sources */,
+				AC1315A2B4955A9FB77494DA /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -116,6 +162,10 @@
 			);
 			name = EntainTests;
 			packageProductDependencies = (
+				141463D9F02D4DB5DDD1D545 /* ViewModels */,
+				2DAEB7E72F515081EED4A83B /* Model */,
+				29F94F211E01BA64053599AE /* Services */,
+				6407145267D97688062F34BA /* UI */,
 			);
 			productName = EntainTests;
 			productReference = F8C4832B57BAACCCECDC7AD1 /* EntainTests.xctest */;
@@ -228,6 +278,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F2675D4863845C24145EEA0 /* EntainTests.swift in Sources */,
+				E80759593EEDC71AC1C70C6B /* RaceListViewModelTests.swift in Sources */,
+				DE47F0792C36CA9C9B665848 /* RaceRowViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -520,6 +572,22 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		141463D9F02D4DB5DDD1D545 /* ViewModels */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ViewModels;
+		};
+		29F94F211E01BA64053599AE /* Services */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Services;
+		};
+		2DAEB7E72F515081EED4A83B /* Model */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Model;
+		};
+		6407145267D97688062F34BA /* UI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = UI;
+		};
 		89F36DB107B3B5659AAED463 /* UI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = UI;

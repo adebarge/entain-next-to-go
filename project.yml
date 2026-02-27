@@ -92,8 +92,17 @@ targets:
     deploymentTarget: "18.0"
     sources:
       - path: EntainTests
+      - path: Packages/ViewModels/Tests/ViewModelsTests
     dependencies:
       - target: Entain
+      - package: ViewModels
+        product: ViewModels
+      - package: Model
+        product: Model
+      - package: Services
+        product: Services
+      - package: UI
+        product: UI
     settings:
       base:
         GENERATE_INFOPLIST_FILE: YES
