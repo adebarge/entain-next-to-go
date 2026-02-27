@@ -61,9 +61,9 @@ public struct RaceRowViewModel: Identifiable, Hashable, Sendable {
     public func countdownText(at now: Date) -> String {
         let interval = advertisedStart.timeIntervalSince(now)
         let isNegative = interval < 0
-        let abs = Swift.abs(interval)
-        let minutes = Int(abs) / 60
-        let seconds = Int(abs) % 60
+        let absInterval = abs(interval)
+        let minutes = Int(absInterval) / 60
+        let seconds = Int(absInterval) % 60
 
         let minFormat = NSLocalizedString("countdown.minutes", bundle: .module, comment: "")
         let secFormat = NSLocalizedString("countdown.seconds", bundle: .module, comment: "")

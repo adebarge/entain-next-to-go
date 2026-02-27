@@ -276,5 +276,8 @@ private extension RaceListViewModelTests {
             try await Task.sleep(for: pollInterval)
         }
         Issue.record("Timed out waiting for async condition.")
+        throw WaitTimeoutError()
     }
+    
+    struct WaitTimeoutError: Error {}
 }

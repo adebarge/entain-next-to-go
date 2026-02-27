@@ -17,6 +17,7 @@ enum APIEndpoint {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.cachePolicy = .reloadIgnoringLocalCacheData
+        request.timeoutInterval = 10.0
         return request
     }
 }
