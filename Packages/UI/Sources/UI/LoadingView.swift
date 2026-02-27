@@ -1,3 +1,4 @@
+import L10n_swift
 import SwiftUI
 import Lottie
 
@@ -12,12 +13,12 @@ public struct LoadingView: View {
                 .frame(width: 200, height: 200)
                 .accessibilityHidden(true)
 
-            Text("Loading races…")
+            Text("loading.message".l10n(.ui))
                 .font(.body)
                 .foregroundStyle(.secondary)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .accessibilityLabel("Loading races, please wait")
+        .accessibilityLabel("loading.accessibility".l10n(.ui))
     }
 }
 

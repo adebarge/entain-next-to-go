@@ -1,3 +1,4 @@
+import L10n_swift
 import SwiftUI
 import Model
 
@@ -28,7 +29,7 @@ public struct FilterBarView: View {
             .padding(.horizontal, 16)
             .padding(.vertical, 8)
         }
-        .accessibilityLabel("Category filter")
+        .accessibilityLabel("filter.bar.accessibility".l10n(.ui))
     }
 }
 
@@ -41,7 +42,7 @@ private struct CategoryChip: View {
 
     var body: some View {
         Button(action: onToggle) {
-            Label(category.displayName, systemImage: category.sfSymbol)
+            Label(category.localizedName, systemImage: category.sfSymbol)
                 .font(.subheadline.weight(.medium))
                 .padding(.horizontal, 14)
                 .padding(.vertical, 8)
@@ -52,8 +53,12 @@ private struct CategoryChip: View {
                 .foregroundStyle(isSelected ? .white : .primary)
                 .animation(.easeInOut(duration: 0.2), value: isSelected)
         }
-        .accessibilityLabel("\(category.displayName) races")
-        .accessibilityHint(isSelected ? "Tap to remove filter" : "Tap to filter by \(category.displayName) races")
+        .accessibilityLabel("filter.chip.label".l10n(.ui, args: [category.localizedName]))
+        .accessibilityHint(
+            isSelected
+                ? "filter.chip.hint.remove".l10n(.ui)
+                : "filter.chip.hint.add".l10n(.ui, args: [category.localizedName])
+        )
         .accessibilityAddTraits(isSelected ? [.isSelected] : [])
     }
 }

@@ -1,3 +1,4 @@
+import L10n_swift
 import SwiftUI
 import Model
 
@@ -23,7 +24,7 @@ public struct RaceRowView: View {
                     .font(.headline)
                     .lineLimit(1)
 
-                Text("Race \(race.raceNumber)")
+                Text("race.row.number".l10n(.ui, args: [race.raceNumber]))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }
@@ -36,11 +37,11 @@ public struct RaceRowView: View {
         .contentShape(Rectangle())
         .accessibilityElement(children: .combine)
         .accessibilityLabel(accessibilityDescription)
-        .accessibilityHint("Race \(race.raceNumber) at \(race.meetingName)")
+        .accessibilityHint("race.row.hint".l10n(.ui, args: [race.raceNumber, race.meetingName]))
     }
 
     private var accessibilityDescription: String {
-        "Race \(race.raceNumber), \(race.meetingName), \(race.category.displayName) race"
+        "race.row.label".l10n(.ui, args: [race.raceNumber, race.meetingName, race.category.localizedName])
     }
 }
 

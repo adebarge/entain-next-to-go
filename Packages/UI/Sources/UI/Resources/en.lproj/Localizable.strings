@@ -1,0 +1,36 @@
+// RaceListView
+"race.list.title" = "Next to Go";
+"race.list.empty.title" = "No Races Available";
+"race.list.empty.description" = "No upcoming races match your filters.";
+"race.list.accessibility" = "Upcoming races";
+
+// RaceRowView
+"race.row.number" = "Race %d";
+"race.row.hint" = "Race %d at %@";
+"race.row.label" = "Race %d, %@, %@ race";
+
+// FilterBarView
+"filter.bar.accessibility" = "Category filter";
+"filter.chip.label" = "%@ races";
+"filter.chip.hint.remove" = "Tap to remove filter";
+"filter.chip.hint.add" = "Tap to filter by %@ races";
+
+// Category names
+"category.horse" = "Horse";
+"category.harness" = "Harness";
+"category.greyhound" = "Greyhound";
+
+// ErrorView
+"error.title" = "Something went wrong";
+"error.retry.button" = "Try Again";
+"error.retry.label" = "Try again";
+"error.retry.hint" = "Retry loading races";
+"error.screen.label" = "Error: %@. Tap 'Try Again' to retry.";
+
+// LoadingView
+"loading.message" = "Loading races...";
+"loading.accessibility" = "Loading races, please wait";
+
+// CountdownLabel
+"countdown.past" = "Started %@ ago";
+"countdown.future" = "Starts in %@";

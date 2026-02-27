@@ -1,3 +1,4 @@
+import L10n_swift
 import SwiftUI
 import Model
 import ViewModels
@@ -21,7 +22,7 @@ public struct RaceListView: View {
                     raceList
                 }
             }
-            .navigationTitle("Next to Go")
+            .navigationTitle("race.list.title".l10n(.ui))
             #if os(iOS)
             .toolbarTitleDisplayMode(.large)
             #endif
@@ -54,16 +55,16 @@ public struct RaceListView: View {
         .overlay {
             if viewModel.visibleRaces.isEmpty && !viewModel.isLoading {
                 ContentUnavailableView(
-                    "No Races Available",
+                    "race.list.empty.title".l10n(.ui),
                     systemImage: "flag.checkered",
-                    description: Text("No upcoming races match your filters.")
+                    description: Text("race.list.empty.description".l10n(.ui))
                 )
             }
         }
         .refreshable {
             _ = await viewModel.fetchRaces()
         }
-        .accessibilityLabel("Upcoming races")
+        .accessibilityLabel("race.list.accessibility".l10n(.ui))
     }
 }
 

@@ -1,3 +1,4 @@
+import L10n_swift
 import SwiftUI
 import Lottie
 
@@ -19,7 +20,7 @@ public struct ErrorView: View {
                 .accessibilityHidden(true)
 
             VStack(spacing: 8) {
-                Text("Something went wrong")
+                Text("error.title".l10n(.ui))
                     .font(.headline)
 
                 Text(error.localizedDescription)
@@ -30,17 +31,17 @@ public struct ErrorView: View {
             }
 
             Button(action: onRetry) {
-                Label("Try Again", systemImage: "arrow.clockwise")
+                Label("error.retry.button".l10n(.ui), systemImage: "arrow.clockwise")
                     .font(.body.weight(.semibold))
                     .padding(.horizontal, 24)
                     .padding(.vertical, 12)
             }
             .buttonStyle(.borderedProminent)
-            .accessibilityLabel("Try again")
-            .accessibilityHint("Retry loading races")
+            .accessibilityLabel("error.retry.label".l10n(.ui))
+            .accessibilityHint("error.retry.hint".l10n(.ui))
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .accessibilityLabel("Error: \(error.localizedDescription). Tap 'Try Again' to retry.")
+        .accessibilityLabel("error.screen.label".l10n(.ui, args: [error.localizedDescription]))
     }
 }
 

@@ -1,3 +1,4 @@
+import L10n_swift
 import SwiftUI
 import Model
 
@@ -31,15 +32,15 @@ public struct CountdownLabel: View {
         let minutes = Int(abs) / 60
         let seconds = Int(abs) % 60
 
-        let minLabel = "\(minutes) minute\(minutes == 1 ? "" : "s")"
-        let secLabel = "\(seconds) second\(seconds == 1 ? "" : "s")"
+        let minLabel = "countdown.minutes".l10nPlural(.ui, args: [minutes])
+        let secLabel = "countdown.seconds".l10nPlural(.ui, args: [seconds])
 
         if isNegative {
             let detail = minutes > 0 ? "\(minLabel) \(secLabel)" : secLabel
-            return "Started \(detail) ago"
+            return "countdown.past".l10n(.ui, args: [detail])
         } else {
             let detail = minutes > 0 ? "\(minLabel) \(secLabel)" : secLabel
-            return "Starts in \(detail)"
+            return "countdown.future".l10n(.ui, args: [detail])
         }
     }
 }
