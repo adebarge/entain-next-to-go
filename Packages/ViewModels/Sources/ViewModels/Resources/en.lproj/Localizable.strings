@@ -32,5 +32,5 @@
 "loading.accessibility" = "Loading races, please wait";
 
 // CountdownLabel
-"countdown.past" = "Started %@ ago";
-"countdown.future" = "Starts in %@";
+"countdown.past" = "-%@";
+"countdown.future" = "%@";

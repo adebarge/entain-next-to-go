@@ -49,22 +49,22 @@ struct RaceRowViewModelTests {
 
     // MARK: - Dynamic countdown
 
-    @Test("countdownText for future race shows 'Starts in' with minutes and seconds")
+    @Test("countdownText for future race uses current localized short format")
     func countdownTextFuture() {
         let now = Date()
         let race = Race.make(start: now.addingTimeInterval(1000)) // 16m 40s
         let row = RaceRowViewModel(race: race)
         let text = row.countdownText(at: now)
-        #expect(text == "Starts in 16 minutes 40 seconds")
+        #expect(text == "16 mins 40 secs")
     }
 
-    @Test("countdownText for past race shows 'Started' with seconds")
+    @Test("countdownText for past race uses current negative prefix format")
     func countdownTextPast() {
         let now = Date()
         let race = Race.make(start: now.addingTimeInterval(-45)) // 45s ago
         let row = RaceRowViewModel(race: race)
         let text = row.countdownText(at: now)
-        #expect(text == "Started 45 seconds ago")
+        #expect(text == "-45 secs")
     }
 
     @Test("countdownText uses singular minute form")
@@ -73,7 +73,7 @@ struct RaceRowViewModelTests {
         let race = Race.make(start: now.addingTimeInterval(65)) // 1m 5s
         let row = RaceRowViewModel(race: race)
         let text = row.countdownText(at: now)
-        #expect(text == "Starts in 1 minute 5 seconds")
+        #expect(text == "1 min 5 secs")
     }
 
     @Test("countdownText uses singular second form")
@@ -82,7 +82,7 @@ struct RaceRowViewModelTests {
         let race = Race.make(start: now.addingTimeInterval(121)) // 2m 1s
         let row = RaceRowViewModel(race: race)
         let text = row.countdownText(at: now)
-        #expect(text == "Starts in 2 minutes 1 second")
+        #expect(text == "2 mins 1 sec")
     }
 
     @Test("isStarted returns false for future race")

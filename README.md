@@ -40,8 +40,8 @@ The `ViewModels` package depends only on the `RaceService` **protocol** from Mod
 
 ## Build & Run
 
-1. Open `Entain.xcodeproj` in Xcode 16
-2. Select an iPhone 16 simulator
+1. Open `Entain.xcodeproj` in Xcode
+2. Select any available iOS simulator (example: iPhone 17)
 3. Press `Cmd+R`
 
 The app fetches live data from `api.neds.com.au` — an internet connection is required.
@@ -52,7 +52,7 @@ The app fetches live data from `api.neds.com.au` — an internet connection is r
 xcodebuild build \
   -project Entain.xcodeproj \
   -scheme Entain \
-  -destination "platform=iOS Simulator,name=iPhone 16" \
+  -destination "platform=iOS Simulator,name=iPhone 17" \
   CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
 ```
 
@@ -61,22 +61,27 @@ xcodebuild build \
 ```bash
 # All tests via Xcode
 xcodebuild test -project Entain.xcodeproj -scheme Entain \
-  -destination "platform=iOS Simulator,name=iPhone 16"
+  -destination "platform=iOS Simulator,name=iPhone 17" \
+  CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
 
 # Package-level tests (faster, no simulator needed)
-swift test --package-path Packages/Model        # CountdownFormatterTests (3 tests)
-swift test --package-path Packages/ViewModels   # RaceListViewModelTests (7 tests)
+swift test --package-path Packages/ViewModels
 ```
 
 ## Testing Checklist
 
-- `CountdownFormatterTests` — positive intervals, negative intervals, fractional seconds
 - `RaceListViewModelTests`:
   - Fetches and limits to 5 visible races
   - Filters by category, deselect-all shows all
   - Races past 60s are excluded from visible list
   - Triggers refetch when below 5 races
   - Error surfacing and retry flow
+- `RaceRowViewModelTests`:
+  - Localized countdown formatting for future/past races
+  - Singular/plural minute and second formatting
+  - Accessibility and static label formatting
+- `EntainTests`:
+  - Project-level XCTest smoke test target for `xcodebuild test`
 
 ## Verification
 
@@ -86,7 +91,7 @@ swift test --package-path Packages/ViewModels   # RaceListViewModelTests (7 test
 | Run | `Cmd+R` → app shows 5 live races |
 | Filter | Tap category chip → list filters |
 | Expiry | Use `MockRaceService` with expired start date |
-| Tests | `Cmd+U` → all tests pass |
+| Tests | Run `swift test --package-path Packages/ViewModels` and `xcodebuild test ...` |
 | VoiceOver | Enable in Simulator → race rows announce full info |
 | Dynamic Type | Increase text size → layout adapts |
 | SwiftLint | Build log shows 0 violations |

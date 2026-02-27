@@ -44,9 +44,9 @@
             parallelizable = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "725A693C59D95FEC4AFD6140"
-               BuildableName = "Entain.app"
-               BlueprintName = "Entain"
+               BlueprintIdentifier = "68FA888FC1F14A8368A07452"
+               BuildableName = "EntainTests.xctest"
+               BlueprintName = "EntainTests"
                ReferencedContainer = "container:Entain.xcodeproj">
             </BuildableReference>
          </TestableReference>

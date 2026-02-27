@@ -86,6 +86,17 @@ targets:
       Release:
         DEBUG_INFORMATION_FORMAT: "dwarf-with-dsym"
         SWIFT_OPTIMIZATION_LEVEL: "-O"
+  EntainTests:
+    type: bundle.unit-test
+    platform: iOS
+    deploymentTarget: "18.0"
+    sources:
+      - path: EntainTests
+    dependencies:
+      - target: Entain
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
 
 schemes:
   Entain:
@@ -97,7 +108,7 @@ schemes:
     test:
       config: Debug
       targets:
-        - Entain
+        - name: EntainTests
     profile:
       config: Release
     analyze:

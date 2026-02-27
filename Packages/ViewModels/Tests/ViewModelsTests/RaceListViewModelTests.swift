@@ -44,8 +44,10 @@ struct RaceListViewModelTests {
         let mock = MockRaceService()
         mock.racesToReturn = (1...7).map { Race.make(id: "race-\($0)", raceNumber: $0) }
         let vm = RaceListViewModel(service: mock)
+        defer { vm.stop() }
 
-        await vm.fetchRaces()
+        vm.start()
+        try await waitUntil { vm.visibleRaces.count == 5 }
 
         #expect(vm.visibleRaces.count == 5)
         #expect(vm.error == nil)
@@ -63,7 +65,9 @@ struct RaceListViewModelTests {
             Race.make(id: "h3", category: .horse)
         ]
         let vm = RaceListViewModel(service: mock)
-        await vm.fetchRaces()
+        defer { vm.stop() }
+        vm.start()
+        try await waitUntil { vm.visibleRaces.count == 5 }
 
         vm.toggleCategory(.horse)
 
@@ -80,7 +84,9 @@ struct RaceListViewModelTests {
             Race.make(id: "r1", category: .harness)
         ]
         let vm = RaceListViewModel(service: mock)
-        await vm.fetchRaces()
+        defer { vm.stop() }
+        vm.start()
+        try await waitUntil { vm.visibleRaces.count == 3 }
 
         vm.toggleCategory(.horse)
         #expect(vm.visibleRaces.count == 1)
@@ -97,7 +103,9 @@ struct RaceListViewModelTests {
         mock.racesToReturn = [expired, future]
 
         let vm = RaceListViewModel(service: mock)
-        await vm.fetchRaces()
+        defer { vm.stop() }
+        vm.start()
+        try await waitUntil { !vm.visibleRaces.isEmpty }
 
         // applyFilter is called during fetchRaces and excludes races past the 60s expiry window
         let visible = vm.visibleRaces
@@ -111,13 +119,17 @@ struct RaceListViewModelTests {
         // First fetch: 3 races (below threshold of 5)
         mock.racesToReturn = (1...3).map { Race.make(id: "r\($0)", raceNumber: $0) }
         let vm = RaceListViewModel(service: mock)
+        defer { vm.stop() }
 
-        await vm.fetchRaces()
+        vm.start()
+        try await waitUntil { mock.fetchCount >= 1 && vm.visibleRaces.count == 3 }
         let firstFetchCount = mock.fetchCount
 
         // Second fetch: provide 5 more
         mock.racesToReturn = (4...8).map { Race.make(id: "r\($0)", raceNumber: $0) }
-        await vm.fetchRaces()
+        try await waitUntil(timeout: .seconds(4)) {
+            mock.fetchCount > firstFetchCount && vm.visibleRaces.count == 5
+        }
 
         #expect(mock.fetchCount > firstFetchCount)
         #expect(vm.visibleRaces.count == 5)
@@ -128,8 +140,10 @@ struct RaceListViewModelTests {
         let mock = MockRaceService()
         mock.shouldThrow = true
         let vm = RaceListViewModel(service: mock)
+        defer { vm.stop() }
 
-        await vm.fetchRaces()
+        vm.start()
+        try await waitUntil { vm.error != nil }
 
         #expect(vm.error != nil)
         #expect(vm.visibleRaces.isEmpty)
@@ -140,18 +154,18 @@ struct RaceListViewModelTests {
         let mock = MockRaceService()
         mock.shouldThrow = true
         let vm = RaceListViewModel(service: mock)
-        await vm.fetchRaces()
+        defer { vm.stop() }
+        vm.start()
+        try await waitUntil { vm.error != nil }
         #expect(vm.error != nil)
 
         mock.shouldThrow = false
         mock.racesToReturn = [Race.make(id: "r1")]
         vm.retry()
-        // Give retry task a moment
-        try await Task.sleep(for: .milliseconds(100))
+        try await waitUntil { vm.error == nil && !vm.visibleRaces.isEmpty }
 
         #expect(vm.error == nil)
         #expect(!vm.visibleRaces.isEmpty)
-        vm.stop()
     }
 
     @Test("Error stops the tick loop; retry restarts it")
@@ -159,9 +173,10 @@ struct RaceListViewModelTests {
         let mock = MockRaceService()
         mock.shouldThrow = true
         let vm = RaceListViewModel(service: mock)
+        defer { vm.stop() }
 
         vm.start()
-        try await Task.sleep(for: .milliseconds(100))
+        try await waitUntil { vm.error != nil }
 
         #expect(vm.error != nil)
         let fetchCountAfterError = mock.fetchCount
@@ -174,10 +189,27 @@ struct RaceListViewModelTests {
         mock.shouldThrow = false
         mock.racesToReturn = (1...5).map { Race.make(id: "r\($0)", raceNumber: $0) }
         vm.retry()
-        try await Task.sleep(for: .milliseconds(100))
+        try await waitUntil { vm.error == nil && !vm.visibleRaces.isEmpty }
 
         #expect(vm.error == nil)
         #expect(!vm.visibleRaces.isEmpty)
-        vm.stop()
+    }
+}
+
+private extension RaceListViewModelTests {
+    func waitUntil(
+        timeout: Duration = .seconds(2),
+        pollInterval: Duration = .milliseconds(20),
+        _ condition: @escaping @MainActor () -> Bool
+    ) async throws {
+        let clock = ContinuousClock()
+        let deadline = clock.now.advanced(by: timeout)
+        while clock.now < deadline {
+            if condition() {
+                return
+            }
+            try await Task.sleep(for: pollInterval)
+        }
+        Issue.record("Timed out waiting for async condition.")
     }
 }

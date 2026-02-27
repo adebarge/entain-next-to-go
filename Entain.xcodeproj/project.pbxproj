@@ -12,17 +12,30 @@
 		90AC2CFC1B5A9FC99BB40153 /* Services in Frameworks */ = {isa = PBXBuildFile; productRef = DFAA44421D4BEC0007DFAA06 /* Services */; };
 		9822AFD4448D84C19DF86715 /* EntainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839D48716579721250859332 /* EntainApp.swift */; };
 		9E890E573012CA349CC7885A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE182E18CB2EEF336323B9DA /* Assets.xcassets */; };
+		9F2675D4863845C24145EEA0 /* EntainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D768D7F9EA37F48FE55FB7 /* EntainTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FE438DCEAF61908668BBD75C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 95A1E65B1C7073A848E50F65 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 725A693C59D95FEC4AFD6140;
+			remoteInfo = Entain;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		01BCF47B642E81DE723710AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		839D48716579721250859332 /* EntainApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntainApp.swift; sourceTree = "<group>"; };
+		90D768D7F9EA37F48FE55FB7 /* EntainTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntainTests.swift; sourceTree = "<group>"; };
 		9C915CAB0CF3102CD1F7CE17 /* UI */ = {isa = PBXFileReference; lastKnownFileType = folder; name = UI; path = Packages/UI; sourceTree = SOURCE_ROOT; };
 		B8834281061166837382ED32 /* Entain.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Entain.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE4499D0929D2A4B1FDB55BF /* Model */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Model; path = Packages/Model; sourceTree = SOURCE_ROOT; };
 		DC785A094EF9F856DEFD811E /* ViewModels */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ViewModels; path = Packages/ViewModels; sourceTree = SOURCE_ROOT; };
 		EE182E18CB2EEF336323B9DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F0D32F3C1035EC06DAD7CDC1 /* Services */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Services; path = Packages/Services; sourceTree = SOURCE_ROOT; };
+		F8C4832B57BAACCCECDC7AD1 /* EntainTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = EntainTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				B8834281061166837382ED32 /* Entain.app */,
+				F8C4832B57BAACCCECDC7AD1 /* EntainTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -72,14 +86,41 @@
 			isa = PBXGroup;
 			children = (
 				10934210D82907445C951D75 /* Entain */,
+				F9F6DFD4402BD22BD8C4987C /* EntainTests */,
 				10956581B2A8A202B8842921 /* Packages */,
 				3B019A252DB8B532FB487BEF /* Products */,
 			);
 			sourceTree = "<group>";
 		};
+		F9F6DFD4402BD22BD8C4987C /* EntainTests */ = {
+			isa = PBXGroup;
+			children = (
+				90D768D7F9EA37F48FE55FB7 /* EntainTests.swift */,
+			);
+			path = EntainTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		68FA888FC1F14A8368A07452 /* EntainTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F97E8C385BE4FDA7FC26869F /* Build configuration list for PBXNativeTarget "EntainTests" */;
+			buildPhases = (
+				EEB258EC405CFB5BC01C0BDB /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D577C937DDD540E876308275 /* PBXTargetDependency */,
+			);
+			name = EntainTests;
+			packageProductDependencies = (
+			);
+			productName = EntainTests;
+			productReference = F8C4832B57BAACCCECDC7AD1 /* EntainTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		725A693C59D95FEC4AFD6140 /* Entain */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 771CF987FC2F9F0F80BF4A33 /* Build configuration list for PBXNativeTarget "Entain" */;
@@ -135,6 +176,7 @@
 			projectRoot = "";
 			targets = (
 				725A693C59D95FEC4AFD6140 /* Entain */,
+				68FA888FC1F14A8368A07452 /* EntainTests */,
 			);
 		};
 /* End PBXProject section */
@@ -181,7 +223,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EEB258EC405CFB5BC01C0BDB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F2675D4863845C24145EEA0 /* EntainTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D577C937DDD540E876308275 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 725A693C59D95FEC4AFD6140 /* Entain */;
+			targetProxy = FE438DCEAF61908668BBD75C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		802EB183CCAF278B07EB117D /* Debug */ = {
@@ -273,6 +331,24 @@
 			};
 			name = Release;
 		};
+		A00453D28CC8ACC8D423A726 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.entain.EntainTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Entain.app/Entain";
+			};
+			name = Debug;
+		};
 		B78A9B662D162BCAD576243E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -355,6 +431,24 @@
 			};
 			name = Debug;
 		};
+		FCB595425F1F54ED30165164 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.entain.EntainTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Entain.app/Entain";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -372,6 +466,15 @@
 			buildConfigurations = (
 				CA35FC00079B1A7F32941FC9 /* Debug */,
 				8973D4E7E5E784A3501531CC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		F97E8C385BE4FDA7FC26869F /* Build configuration list for PBXNativeTarget "EntainTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A00453D28CC8ACC8D423A726 /* Debug */,
+				FCB595425F1F54ED30165164 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

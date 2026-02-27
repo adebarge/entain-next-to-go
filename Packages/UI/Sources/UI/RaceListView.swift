@@ -4,10 +4,10 @@ import ViewModels
 
 /// The root view of the app — shows the filter bar and list of upcoming races.
 public struct RaceListView: View {
-    @State private var viewModel: RaceListViewModel
+    private let viewModel: RaceListViewModel
 
     public init(viewModel: RaceListViewModel) {
-        _viewModel = State(initialValue: viewModel)
+        self.viewModel = viewModel
     }
 
     public var body: some View {
@@ -69,9 +69,6 @@ public struct RaceListView: View {
                     description: Text(RaceListViewModel.emptyDescription)
                 )
             }
-        }
-        .refreshable {
-            _ = await viewModel.fetchRaces()
         }
         .accessibilityLabel(RaceListViewModel.listAccessibilityLabel)
     }

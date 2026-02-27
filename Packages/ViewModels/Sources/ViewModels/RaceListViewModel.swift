@@ -18,10 +18,11 @@ public final class RaceListViewModel {
 
     // MARK: - Public state (automatically observed via @Observable)
 
-    public var visibleRaces: [RaceRowViewModel] = []
-    public var selectedCategories: Set<RaceCategory> = []
-    public var isLoading: Bool = false
-    public var error: Error?
+    public private(set) var visibleRaces: [RaceRowViewModel] = []
+    public private(set) var selectedCategories: Set<RaceCategory> = []
+    public private(set) var isLoading: Bool = false
+    public private(set) var error: Error?
+
     public var isFilterBarDisabled: Bool {
         visibleRaces.isEmpty && (isLoading || error != nil)
     }
@@ -109,10 +110,13 @@ public final class RaceListViewModel {
         }
         applyFilter(now: Date())
     }
+}
+
+private extension RaceListViewModel {
 
     // MARK: - Private helpers
 
-    private func runTickLoop() async {
+    func runTickLoop() async {
         while !Task.isCancelled {
             do {
                 try await Task.sleep(for: .seconds(1))
@@ -129,14 +133,14 @@ public final class RaceListViewModel {
     }
 
     /// Remove races that started more than 60 seconds ago.
-    private func pruneExpired(now: Date) {
+    func pruneExpired(now: Date) {
         allRaces = allRaces.filter { race in
             race.advertisedStart.timeIntervalSince(now) > -Self.expiryInterval
         }
     }
 
     /// Apply expiry + category filter and pick the first 5 races.
-    private func applyFilter(now: Date) {
+    func applyFilter(now: Date) {
         // Always exclude races past the expiry window for the visible list
         let active = allRaces.filter {
             $0.advertisedStart.timeIntervalSince(now) > -Self.expiryInterval
@@ -150,7 +154,7 @@ public final class RaceListViewModel {
         visibleRaces = Array(filtered.prefix(Self.visibleCount)).map { RaceRowViewModel(race: $0) }
     }
 
-    public func fetchRaces() async {
+    func fetchRaces() async {
         guard !isLoading else { return }
         isLoading = true
         defer { isLoading = false }
