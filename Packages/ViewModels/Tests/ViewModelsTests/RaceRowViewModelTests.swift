@@ -51,7 +51,7 @@ struct RaceRowViewModelTests {
 
     @Test("countdownText for future race uses current localized short format")
     func countdownTextFuture() {
-        let now = Date()
+        let now = Date.now
         let race = Race.make(start: now.addingTimeInterval(1000)) // 16m 40s
         let row = RaceRowViewModel(race: race)
         let text = row.countdownText(at: now)
@@ -60,7 +60,7 @@ struct RaceRowViewModelTests {
 
     @Test("countdownText for past race uses current negative prefix format")
     func countdownTextPast() {
-        let now = Date()
+        let now = Date.now
         let race = Race.make(start: now.addingTimeInterval(-45)) // 45s ago
         let row = RaceRowViewModel(race: race)
         let text = row.countdownText(at: now)
@@ -69,7 +69,7 @@ struct RaceRowViewModelTests {
 
     @Test("countdownText uses singular minute form")
     func countdownTextSingularMinute() {
-        let now = Date()
+        let now = Date.now
         let race = Race.make(start: now.addingTimeInterval(65)) // 1m 5s
         let row = RaceRowViewModel(race: race)
         let text = row.countdownText(at: now)
@@ -78,7 +78,7 @@ struct RaceRowViewModelTests {
 
     @Test("countdownText uses singular second form")
     func countdownTextSingularSecond() {
-        let now = Date()
+        let now = Date.now
         let race = Race.make(start: now.addingTimeInterval(121)) // 2m 1s
         let row = RaceRowViewModel(race: race)
         let text = row.countdownText(at: now)
@@ -87,14 +87,14 @@ struct RaceRowViewModelTests {
 
     @Test("isStarted returns false for future race")
     func isStartedFuture() {
-        let now = Date()
+        let now = Date.now
         let row = RaceRowViewModel(race: Race.make(start: now.addingTimeInterval(10)))
         #expect(!row.isStarted(at: now))
     }
 
     @Test("isStarted returns true for past race")
     func isStartedPast() {
-        let now = Date()
+        let now = Date.now
         let row = RaceRowViewModel(race: Race.make(start: now.addingTimeInterval(-10)))
         #expect(row.isStarted(at: now))
     }

@@ -47,7 +47,7 @@ extension Race {
         id: String = UUID().uuidString,
         meetingName: String = "Test Meeting",
         raceNumber: Int = 1,
-        start: Date = Date().addingTimeInterval(300),
+        start: Date = Date.now.addingTimeInterval(300),
         category: RaceCategory = .horse
     ) -> Race {
         Race(id: id, meetingName: meetingName, raceNumber: raceNumber,
@@ -120,8 +120,8 @@ struct RaceListViewModelTests {
     @Test("Expired races (older than 60s) are pruned from visible list")
     func expiredRacesArePruned() async throws {
         let mock = MockRaceService()
-        let expired = Race.make(id: "expired", start: Date().addingTimeInterval(-90))
-        let future = Race.make(id: "future", start: Date().addingTimeInterval(300))
+        let expired = Race.make(id: "expired", start: Date.now.addingTimeInterval(-90))
+        let future = Race.make(id: "future", start: Date.now.addingTimeInterval(300))
         mock.racesToReturn = [expired, future]
 
         let testSubject = RaceListViewModel(service: mock)

@@ -23,9 +23,6 @@ public struct RaceListView: View {
                         title: viewModel.errorTitle,
                         message: viewModel.errorMessage,
                         retryButtonText: viewModel.errorRetryButtonText,
-                        retryLabel: viewModel.errorRetryLabel,
-                        retryHint: viewModel.errorRetryHint,
-                        screenLabel: viewModel.errorScreenLabel,
                         onRetry: { viewModel.retry() }
                     )
                 } else {
@@ -65,12 +62,11 @@ public struct RaceListView: View {
             if viewModel.visibleRaces.isEmpty && !viewModel.isLoading {
                 ContentUnavailableView(
                     viewModel.emptyTitle,
-                    systemImage: "flag.checkered",
-                    description: Text(viewModel.emptyDescription)
+                    systemImage: viewModel.emptyImageName
                 )
+                .foregroundStyle(Color.accentColor)
             }
         }
-        .accessibilityLabel(viewModel.listAccessibilityLabel)
     }
 }
 
@@ -79,11 +75,11 @@ private final class PreviewRaceService: RaceService, @unchecked Sendable {
     func fetchNextRaces(count: Int) async throws -> [Race] {
         [
             Race(id: "1", meetingName: "Randwick", raceNumber: 3,
-                 advertisedStart: Date().addingTimeInterval(83), category: .horse),
+                 advertisedStart: Date.now.addingTimeInterval(83), category: .horse),
             Race(id: "2", meetingName: "The Meadows", raceNumber: 7,
-                 advertisedStart: Date().addingTimeInterval(200), category: .greyhound),
+                 advertisedStart: Date.now.addingTimeInterval(200), category: .greyhound),
             Race(id: "3", meetingName: "Menangle", raceNumber: 2,
-                 advertisedStart: Date().addingTimeInterval(350), category: .harness)
+                 advertisedStart: Date.now.addingTimeInterval(350), category: .harness)
         ]
     }
 }

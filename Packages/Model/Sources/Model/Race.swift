@@ -23,7 +23,7 @@ public struct Race: Identifiable, Hashable, Sendable {
     }
 
     /// Seconds until (positive) or since (negative) the advertised start.
-    public func secondsUntilStart(from now: Date = Date()) -> TimeInterval {
+    public func secondsUntilStart(from now: Date = Date.now) -> TimeInterval {
         advertisedStart.timeIntervalSince(now)
     }
 }

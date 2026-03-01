@@ -59,7 +59,11 @@ private struct CategoryChip: View {
                     isSelected ? Color.accentColor : Color.secondary.opacity(0.15),
                     in: Capsule()
                 )
-                .foregroundStyle(isSelected ? .white : .primary)
+                .foregroundStyle(isSelected ? .primary : Color.accentColor)
+                .glassEffect(
+                    .regular,
+                    in: Capsule()
+                )
                 .animation(.easeInOut(duration: 0.2), value: isSelected)
         }
         .accessibilityLabel(category.chipAccessibilityLabel())

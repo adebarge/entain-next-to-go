@@ -58,7 +58,6 @@ public struct RaceRowView: View {
         .contentShape(Rectangle())
         .accessibilityElement(children: .combine)
         .accessibilityLabel(viewModel.accessibilityLabel)
-        .accessibilityHint(viewModel.accessibilityHint)
         .accessibilityRemoveTraits(.isButton)
         .accessibilityAddTraits(.updatesFrequently)
     }
@@ -73,14 +72,14 @@ import Model
             id: "preview",
             meetingName: "Randwick",
             raceNumber: 3,
-            advertisedStart: Date().addingTimeInterval(83),
+            advertisedStart: Date.now.addingTimeInterval(83),
             category: .horse
         )))
         RaceRowView(viewModel: RaceRowViewModel(race: Race(
             id: "preview2",
             meetingName: "The Meadows",
             raceNumber: 7,
-            advertisedStart: Date().addingTimeInterval(-30),
+            advertisedStart: Date.now.addingTimeInterval(-30),
             category: .greyhound
         )))
     }

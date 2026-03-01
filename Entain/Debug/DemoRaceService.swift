@@ -11,7 +11,12 @@ struct DemoRaceService: RaceService {
         if delay > 0 {
             try await Task.sleep(for: .seconds(delay))
         }
-        let now = Date()
+
+        if UserDefaults.standard.bool(forKey: "demo_simulate_empty_state") {
+            return []
+        }
+
+        let now = Date.now
         return [
             Race(id: "demo-1", meetingName: "Randwick", raceNumber: 3,
                  advertisedStart: now + 45, category: .horse),

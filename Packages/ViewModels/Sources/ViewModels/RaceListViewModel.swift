@@ -91,15 +91,11 @@ extension RaceListViewModel {
     public var emptyTitle: String {
         NSLocalizedString("race.list.empty.title", bundle: .module, comment: "")
     }
-    
-    public var emptyDescription: String {
-        NSLocalizedString("race.list.empty.description", bundle: .module, comment: "")
-    }
-    
-    public var listAccessibilityLabel: String {
-        NSLocalizedString("race.list.accessibility", bundle: .module, comment: "")
-    }
 
+    public var emptyImageName: String {
+        "flag.checkered"
+    }
+    
     public var filterBarAccessibilityLabel: String {
         NSLocalizedString("filter.bar.accessibility", bundle: .module, comment: "")
     }
@@ -122,18 +118,6 @@ extension RaceListViewModel {
 
     public var errorRetryButtonText: String {
         NSLocalizedString("error.retry.button", bundle: .module, comment: "")
-    }
-
-    public var errorRetryLabel: String {
-        NSLocalizedString("error.retry.label", bundle: .module, comment: "")
-    }
-
-    public var errorRetryHint: String {
-        NSLocalizedString("error.retry.hint", bundle: .module, comment: "")
-    }
-
-    public var errorScreenLabel: String {
-        NSLocalizedString("error.screen.label", bundle: .module, comment: "")
     }
 }
 

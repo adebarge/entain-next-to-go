@@ -1,12 +1,9 @@
 // RaceListView
 "race.list.title" = "Next to Go";
 "race.list.empty.title" = "No Races Available";
-"race.list.empty.description" = "No upcoming races match your filters.";
-"race.list.accessibility" = "Upcoming races";
 
 // RaceRowView
 "race.row.number" = "Race %d";
-"race.row.hint" = "Race %d at %@";
 "race.row.label" = "Race %d, %@, %@ race";
 
 // FilterBarView

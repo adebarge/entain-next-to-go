@@ -33,7 +33,7 @@ import Model
         id: "preview",
         meetingName: "Randwick",
         raceNumber: 3,
-        advertisedStart: Date().addingTimeInterval(83),
+        advertisedStart: Date.now.addingTimeInterval(83),
         category: .horse
     )))
     .padding()
