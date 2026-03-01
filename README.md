@@ -74,6 +74,35 @@ swift test --package-path Packages/ViewModels
 xcodegen generate
 ```
 
+## SwiftLint
+
+SwiftLint runs automatically as a build phase. To run it manually:
+
+```bash
+swiftlint --config .swiftlint.yml
+```
+
+**Scope** — lints `Entain/` and `Packages/`, excluding test directories and build artifacts.
+
+**Notable rules enabled:**
+
+| Rule | Severity |
+|------|----------|
+| `force_unwrapping` | error |
+| `implicitly_unwrapped_optional` | error |
+| `unused_declaration` / `unused_import` | analyzer |
+| `force_cast` / `force_try` | warning (default) |
+
+**Limits:**
+
+| Metric | Warning | Error |
+|--------|---------|-------|
+| Line length | 120 | 160 |
+| File length | 400 | 600 |
+| Type body length | 300 | 400 |
+| Function body length | 50 | 80 |
+| Cyclomatic complexity | 10 | 20 |
+
 ## Testing Checklist
 
 - `RaceListViewModelTests`:
