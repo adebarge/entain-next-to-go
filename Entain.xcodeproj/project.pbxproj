@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 63;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -46,7 +46,7 @@
 		8E813847C5B2ADC23CC1F2B9 /* RaceRowViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceRowViewModelTests.swift; sourceTree = "<group>"; };
 		90D768D7F9EA37F48FE55FB7 /* EntainTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntainTests.swift; sourceTree = "<group>"; };
 		9C915CAB0CF3102CD1F7CE17 /* UI */ = {isa = PBXFileReference; lastKnownFileType = folder; name = UI; path = Packages/UI; sourceTree = SOURCE_ROOT; };
-		B8834281061166837382ED32 /* Entain.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Entain.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B8834281061166837382ED32 /* Entain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Entain.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C03C6EE424FCE0FA791A3544 /* DemoRaceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoRaceService.swift; sourceTree = "<group>"; };
 		CE4499D0929D2A4B1FDB55BF /* Model */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Model; path = Packages/Model; sourceTree = SOURCE_ROOT; };
 		DC785A094EF9F856DEFD811E /* ViewModels */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ViewModels; path = Packages/ViewModels; sourceTree = SOURCE_ROOT; };
@@ -267,7 +267,6 @@
 				1ED1FF9322D0B589DDB03CC4 /* XCLocalSwiftPackageReference "Packages/UI" */,
 				464E09FB26C7DF71A92E72F1 /* XCLocalSwiftPackageReference "Packages/ViewModels" */,
 			);
-			preferredProjectObjectVersion = 77;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -419,6 +418,7 @@
 				DEVELOPMENT_ASSET_PATHS = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Entain/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.sports";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -520,6 +520,7 @@
 				DEVELOPMENT_ASSET_PATHS = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Entain/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.sports";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
