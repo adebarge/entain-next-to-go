@@ -16,7 +16,7 @@ public struct RaceRowViewModel: Identifiable, Hashable, Sendable {
     public let categoryName: String         // e.g. "Horse"
     public let category: RaceCategory       // kept for filter/test use
     public let sfSymbol: String
-    public let accessibilityLabel: String   // e.g. "Race 7, Randwick, Horse race"
+    public let accessibilityLabel: String   // e.g. "Race 7, Randwick, Horse race, starts at 3:45 PM"
 
     // MARK: - Internal (used only for countdown computation)
 
@@ -37,11 +37,14 @@ public struct RaceRowViewModel: Identifiable, Hashable, Sendable {
 
         categoryName = race.category.localizedName
 
+        let startTime = race.advertisedStart.formatted(.dateTime.hour().minute().second())
+
         accessibilityLabel = String(
             format: NSLocalizedString("race.row.label", bundle: .module, comment: ""),
             race.raceNumber,
             race.meetingName,
-            race.category.localizedName
+            race.category.localizedName,
+            startTime
         )
 
         advertisedStart = race.advertisedStart

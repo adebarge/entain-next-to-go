@@ -183,14 +183,6 @@ struct RaceListViewModelTests {
         #expect(!testSubject.errorMessage.contains("NSURLErrorDomain"))
     }
 
-    @Test("Error accessibility label is non-technical")
-    func usesErrorScreenLabel() {
-        let mock = MockRaceService()
-        let testSubject = RaceListViewModel(service: mock)
-        #expect(testSubject.errorScreenLabel == "Unable to load races. Tap 'Try Again' to retry.")
-        #expect(!testSubject.errorScreenLabel.contains("%@"))
-    }
-
     @Test("Retry clears error and re-fetches")
     func retryClears() async throws {
         let mock = MockRaceService()

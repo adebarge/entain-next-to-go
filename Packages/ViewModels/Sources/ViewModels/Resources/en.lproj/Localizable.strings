@@ -4,7 +4,7 @@
 
 // RaceRowView
 "race.row.number" = "Race %d";
-"race.row.label" = "Race %d, %@, %@ race";
+"race.row.label" = "Race %d, %@, %@ race, starts at %@";
 
 // FilterBarView
 "filter.bar.accessibility" = "Category filter";

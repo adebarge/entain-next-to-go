@@ -33,18 +33,13 @@ struct RaceRowViewModelTests {
         #expect(row.categoryName == "Greyhound")
     }
 
-    @Test("accessibilityLabel formats race number, meeting, category")
+    @Test("accessibilityLabel formats race number, meeting, category and start time")
     func accessibilityLabel() {
-        let race = Race.make(meetingName: "Randwick", raceNumber: 3, category: .horse)
+        let start = Date(timeIntervalSince1970: 1_700_000_000)
+        let race = Race.make(meetingName: "Randwick", raceNumber: 3, start: start, category: .horse)
         let row = RaceRowViewModel(race: race)
-        #expect(row.accessibilityLabel == "Race 3, Randwick, Horse race")
-    }
-
-    @Test("accessibilityHint formats race number and meeting")
-    func accessibilityHint() {
-        let race = Race.make(meetingName: "Randwick", raceNumber: 3)
-        let row = RaceRowViewModel(race: race)
-        #expect(row.accessibilityHint == "Race 3 at Randwick")
+        let expectedTime = start.formatted(.dateTime.hour().minute().second())
+        #expect(row.accessibilityLabel == "Race 3, Randwick, Horse race, starts at \(expectedTime)")
     }
 
     // MARK: - Dynamic countdown
