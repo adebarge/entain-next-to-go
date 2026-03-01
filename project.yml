@@ -94,6 +94,7 @@ targets:
     sources:
       - path: EntainTests
       - path: Packages/ViewModels/Tests/ViewModelsTests
+      - path: Packages/Services/Tests/ServicesTests
     dependencies:
       - target: Entain
       - package: ViewModels

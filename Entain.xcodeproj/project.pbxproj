@@ -20,6 +20,7 @@
 		9F2675D4863845C24145EEA0 /* EntainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D768D7F9EA37F48FE55FB7 /* EntainTests.swift */; };
 		AEB1F2BA987886E53516AD96 /* ViewModels in Frameworks */ = {isa = PBXBuildFile; productRef = 141463D9F02D4DB5DDD1D545 /* ViewModels */; };
 		D62D6B1C301E4E67BC16232F /* AppMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412DBDA1E9314EA4C6753E77 /* AppMode.swift */; };
+		DAEEC031028F76CABA790C0D /* ServicesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FCE733189DA18E777AFEB9 /* ServicesTests.swift */; };
 		DE47F0792C36CA9C9B665848 /* RaceRowViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E813847C5B2ADC23CC1F2B9 /* RaceRowViewModelTests.swift */; };
 		E80759593EEDC71AC1C70C6B /* RaceListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE8C682487D00DE2E8E819C /* RaceListViewModelTests.swift */; };
 		F05EB9F6004F4E3F527E573A /* Services in Frameworks */ = {isa = PBXBuildFile; productRef = 29F94F211E01BA64053599AE /* Services */; };
@@ -39,6 +40,7 @@
 		01BCF47B642E81DE723710AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		412DBDA1E9314EA4C6753E77 /* AppMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMode.swift; sourceTree = "<group>"; };
 		5D23AD151B2693DBABC15D1F /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = wrapper.cfbundle; path = Settings.bundle; sourceTree = "<group>"; };
+		75FCE733189DA18E777AFEB9 /* ServicesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesTests.swift; sourceTree = "<group>"; };
 		839D48716579721250859332 /* EntainApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntainApp.swift; sourceTree = "<group>"; };
 		8BE8C682487D00DE2E8E819C /* RaceListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceListViewModelTests.swift; sourceTree = "<group>"; };
 		8E813847C5B2ADC23CC1F2B9 /* RaceRowViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceRowViewModelTests.swift; sourceTree = "<group>"; };
@@ -107,9 +109,18 @@
 				F0D32F3C1035EC06DAD7CDC1 /* Services */,
 				9C915CAB0CF3102CD1F7CE17 /* UI */,
 				DC785A094EF9F856DEFD811E /* ViewModels */,
+				FA171F397BC940BE4AB86166 /* Services */,
 				AC10EF508C8718931BDF57FE /* ViewModels */,
 			);
 			path = Packages;
+			sourceTree = "<group>";
+		};
+		3425B748FCF4D773FC80AD10 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				F6FB99FE4CA49CD28A557AFE /* ServicesTests */,
+			);
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		3B019A252DB8B532FB487BEF /* Products */ = {
@@ -147,12 +158,28 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		F6FB99FE4CA49CD28A557AFE /* ServicesTests */ = {
+			isa = PBXGroup;
+			children = (
+				75FCE733189DA18E777AFEB9 /* ServicesTests.swift */,
+			);
+			path = ServicesTests;
+			sourceTree = "<group>";
+		};
 		F9F6DFD4402BD22BD8C4987C /* EntainTests */ = {
 			isa = PBXGroup;
 			children = (
 				90D768D7F9EA37F48FE55FB7 /* EntainTests.swift */,
 			);
 			path = EntainTests;
+			sourceTree = "<group>";
+		};
+		FA171F397BC940BE4AB86166 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				3425B748FCF4D773FC80AD10 /* Tests */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		FF97D20F1967565009F509BA /* ViewModelsTests */ = {
@@ -302,6 +329,7 @@
 				9F2675D4863845C24145EEA0 /* EntainTests.swift in Sources */,
 				E80759593EEDC71AC1C70C6B /* RaceListViewModelTests.swift in Sources */,
 				DE47F0792C36CA9C9B665848 /* RaceRowViewModelTests.swift in Sources */,
+				DAEEC031028F76CABA790C0D /* ServicesTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
