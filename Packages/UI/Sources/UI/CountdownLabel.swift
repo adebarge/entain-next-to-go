@@ -19,7 +19,7 @@ public struct CountdownLabel: View {
 
             Text(text)
                 .font(.body.monospacedDigit())
-                .foregroundStyle(isStarted ? .red : .primary)
+                .foregroundStyle(isStarted ? .red : Color.accentColor)
                 .accessibilityLabel(text)
         }
     }
