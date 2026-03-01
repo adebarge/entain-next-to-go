@@ -21,8 +21,8 @@ public enum RaceCategory: String, CaseIterable, Identifiable, Sendable {
     public var sfSymbol: String {
         switch self {
         case .horse:      return "figure.equestrian.sports"
-        case .harness:    return "cart"
-        case .greyhound:  return "hare"
+        case .harness:    return "motorcycle"
+        case .greyhound:  return "dog"
         }
     }
 

@@ -56,8 +56,8 @@ public struct RaceListView: View {
 
     private var raceList: some View {
         List {
-            ForEach(viewModel.visibleRaces) { rowVM in
-                RaceRowView(row: rowVM)
+            ForEach(viewModel.visibleRaces) { rowViewModel in
+                RaceRowView(viewModel: rowViewModel)
             }
         }
         .listStyle(.plain)

@@ -3,40 +3,64 @@ import ViewModels
 
 /// A single row in the race list.
 public struct RaceRowView: View {
-    private let row: RaceRowViewModel
+    private let viewModel: RaceRowViewModel
 
-    public init(row: RaceRowViewModel) {
-        self.row = row
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+
+    public init(viewModel: RaceRowViewModel) {
+        self.viewModel = viewModel
+    }
+
+    private var icon: some View {
+        Image(systemName: viewModel.sfSymbol)
+            .foregroundStyle(Color.accentColor)
+            .frame(width: 36, height: 36)
+            .accessibilityHidden(true)
+    }
+
+    private var nameStack: some View {
+        VStack(alignment: .leading, spacing: 2) {
+            Text(viewModel.meetingName)
+                .font(.headline)
+
+            Text(viewModel.raceNumberText)
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+        }
     }
 
     public var body: some View {
-        HStack(alignment: .center, spacing: 12) {
-            // Category icon
-            Image(systemName: row.sfSymbol)
-                .font(.title2)
-                .foregroundStyle(Color.accentColor)
-                .frame(width: 36)
-                .accessibilityHidden(true)
+        Group {
+            if dynamicTypeSize.isAccessibilitySize {
+                VStack(alignment: .leading, spacing: 6) {
+                    HStack(spacing: 12) {
+                        icon
 
-            VStack(alignment: .leading, spacing: 2) {
-                Text(row.meetingName)
-                    .font(.headline)
-                    .lineLimit(1)
+                        nameStack
+                    }
 
-                Text(row.raceNumberText)
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                    CountdownLabel(viewModel: viewModel)
+                }
+
+            } else {
+                HStack(alignment: .center, spacing: 12) {
+                    icon
+
+                    nameStack
+
+                    Spacer()
+
+                    CountdownLabel(viewModel: viewModel)
+                }
             }
-
-            Spacer()
-
-            CountdownLabel(row: row)
         }
         .padding(.vertical, 4)
         .contentShape(Rectangle())
         .accessibilityElement(children: .combine)
-        .accessibilityLabel(row.accessibilityLabel)
-        .accessibilityHint(row.accessibilityHint)
+        .accessibilityLabel(viewModel.accessibilityLabel)
+        .accessibilityHint(viewModel.accessibilityHint)
+        .accessibilityRemoveTraits(.isButton)
+        .accessibilityAddTraits(.updatesFrequently)
     }
 }
 
@@ -45,14 +69,14 @@ import Model
 
 #Preview {
     List {
-        RaceRowView(row: RaceRowViewModel(race: Race(
+        RaceRowView(viewModel: RaceRowViewModel(race: Race(
             id: "preview",
             meetingName: "Randwick",
             raceNumber: 3,
             advertisedStart: Date().addingTimeInterval(83),
             category: .horse
         )))
-        RaceRowView(row: RaceRowViewModel(race: Race(
+        RaceRowView(viewModel: RaceRowViewModel(race: Race(
             id: "preview2",
             meetingName: "The Meadows",
             raceNumber: 7,

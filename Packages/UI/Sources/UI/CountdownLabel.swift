@@ -6,16 +6,16 @@ import ViewModels
 /// Uses `TimelineView(.everySecond)` so SwiftUI automatically re-renders the
 /// countdown string every second without any ViewModel timer.
 public struct CountdownLabel: View {
-    private let row: RaceRowViewModel
+    private let viewModel: RaceRowViewModel
 
-    public init(row: RaceRowViewModel) {
-        self.row = row
+    public init(viewModel: RaceRowViewModel) {
+        self.viewModel = viewModel
     }
 
     public var body: some View {
         TimelineView(.periodic(from: .now, by: 1)) { context in
-            let text = row.countdownText(at: context.date)
-            let isStarted = row.isStarted(at: context.date)
+            let text = viewModel.countdownText(at: context.date)
+            let isStarted = viewModel.isStarted(at: context.date)
 
             Text(text)
                 .font(.body.monospacedDigit())
@@ -29,7 +29,7 @@ public struct CountdownLabel: View {
 import Model
 
 #Preview {
-    CountdownLabel(row: RaceRowViewModel(race: Race(
+    CountdownLabel(viewModel: RaceRowViewModel(race: Race(
         id: "preview",
         meetingName: "Randwick",
         raceNumber: 3,
