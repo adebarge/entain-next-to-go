@@ -21,9 +21,6 @@
 "error.title" = "Something went wrong";
 "error.message.generic" = "We couldn't load races right now. Please try again.";
 "error.retry.button" = "Try Again";
-"error.retry.label" = "Try again";
-"error.retry.hint" = "Retry loading races";
-"error.screen.label" = "Unable to load races. Tap 'Try Again' to retry.";
 
 // LoadingView
 "loading.message" = "Loading races...";

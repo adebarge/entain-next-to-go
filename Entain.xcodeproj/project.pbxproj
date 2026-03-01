@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 63;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -44,13 +44,13 @@
 		8E813847C5B2ADC23CC1F2B9 /* RaceRowViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceRowViewModelTests.swift; sourceTree = "<group>"; };
 		90D768D7F9EA37F48FE55FB7 /* EntainTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntainTests.swift; sourceTree = "<group>"; };
 		9C915CAB0CF3102CD1F7CE17 /* UI */ = {isa = PBXFileReference; lastKnownFileType = folder; name = UI; path = Packages/UI; sourceTree = SOURCE_ROOT; };
-		B8834281061166837382ED32 /* Entain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Entain.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B8834281061166837382ED32 /* Entain.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Entain.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C03C6EE424FCE0FA791A3544 /* DemoRaceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoRaceService.swift; sourceTree = "<group>"; };
 		CE4499D0929D2A4B1FDB55BF /* Model */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Model; path = Packages/Model; sourceTree = SOURCE_ROOT; };
 		DC785A094EF9F856DEFD811E /* ViewModels */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ViewModels; path = Packages/ViewModels; sourceTree = SOURCE_ROOT; };
 		EE182E18CB2EEF336323B9DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F0D32F3C1035EC06DAD7CDC1 /* Services */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Services; path = Packages/Services; sourceTree = SOURCE_ROOT; };
-		F8C4832B57BAACCCECDC7AD1 /* EntainTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EntainTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F8C4832B57BAACCCECDC7AD1 /* EntainTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = EntainTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,7 +221,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastUpgradeCheck = 2630;
+				LastUpgradeCheck = 1800;
 			};
 			buildConfigurationList = 110B22C517ED5E4751C5A1A8 /* Build configuration list for PBXProject "Entain" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -240,6 +240,7 @@
 				1ED1FF9322D0B589DDB03CC4 /* XCLocalSwiftPackageReference "Packages/UI" */,
 				464E09FB26C7DF71A92E72F1 /* XCLocalSwiftPackageReference "Packages/ViewModels" */,
 			);
+			preferredProjectObjectVersion = 77;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -319,7 +320,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -374,7 +374,6 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_STRICT_CONCURRENCY = complete;
@@ -392,7 +391,6 @@
 				DEVELOPMENT_ASSET_PATHS = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Entain/Info.plist;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.sports";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -430,7 +428,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -478,7 +475,6 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_STRICT_CONCURRENCY = complete;
@@ -496,7 +492,6 @@
 				DEVELOPMENT_ASSET_PATHS = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Entain/Info.plist;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.sports";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

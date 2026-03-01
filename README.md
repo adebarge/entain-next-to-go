@@ -34,8 +34,8 @@ The `ViewModels` package depends only on the `RaceService` **protocol** from Mod
 
 ## Requirements
 
-- Xcode 16.0+
-- iOS 18.0 deployment target
+- Xcode 18.0+
+- iOS 26.0 deployment target
 - Swift 6
 
 ## Build & Run

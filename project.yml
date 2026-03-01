@@ -2,9 +2,9 @@ name: Entain
 options:
   bundleIdPrefix: com.entain
   deploymentTarget:
-    iOS: "18.0"
+    iOS: "26.0"
   defaultConfig: Debug
-  xcodeVersion: "16.0"
+  xcodeVersion: "18.0"
   generateEmptyDirectories: true
   createIntermediateGroups: true
 
@@ -31,7 +31,7 @@ targets:
   Entain:
     type: application
     platform: iOS
-    deploymentTarget: "18.0"
+    deploymentTarget: "26.0"
     sources:
       - path: Entain
     resources:
@@ -90,7 +90,7 @@ targets:
   EntainTests:
     type: bundle.unit-test
     platform: iOS
-    deploymentTarget: "18.0"
+    deploymentTarget: "26.0"
     sources:
       - path: EntainTests
       - path: Packages/ViewModels/Tests/ViewModelsTests

@@ -70,42 +70,6 @@
 			<key>KeyboardType</key>
 			<string>NumberPad</string>
 		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-			<key>Title</key>
-			<string>Timing</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSTextFieldSpecifier</string>
-			<key>Title</key>
-			<string>Expiry Interval (s)</string>
-			<key>Key</key>
-			<string>vm_expiry_interval</string>
-			<key>KeyboardType</key>
-			<string>NumberPad</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSTextFieldSpecifier</string>
-			<key>Title</key>
-			<string>Min Fetch Interval (s)</string>
-			<key>Key</key>
-			<string>vm_min_fetch_interval</string>
-			<key>KeyboardType</key>
-			<string>NumberPad</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSTextFieldSpecifier</string>
-			<key>Title</key>
-			<string>Visible Count</string>
-			<key>Key</key>
-			<string>vm_visible_count</string>
-			<key>KeyboardType</key>
-			<string>NumberPad</string>
-		</dict>
 	</array>
 </dict>
 </plist>

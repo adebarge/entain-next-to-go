@@ -35,8 +35,6 @@ public final class RaceListViewModel {
     private let configuration: RaceListConfiguration
     private var lastFetchAt: Date?
 
-    // MARK: - Static localised strings (view-level labels)
-
     // MARK: - Init
 
     public init(service: any RaceService, configuration: RaceListConfiguration = .default) {

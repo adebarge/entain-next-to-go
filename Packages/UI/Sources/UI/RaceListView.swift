@@ -71,7 +71,7 @@ public struct RaceListView: View {
 }
 
 #if DEBUG
-private final class PreviewRaceService: RaceService, @unchecked Sendable {
+private struct PreviewRaceService: RaceService {
     func fetchNextRaces(count: Int) async throws -> [Race] {
         [
             Race(id: "1", meetingName: "Randwick", raceNumber: 3,

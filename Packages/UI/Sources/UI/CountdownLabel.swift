@@ -3,7 +3,7 @@ import ViewModels
 
 /// Displays a live countdown to a race's advertised start time.
 ///
-/// Uses `TimelineView(.everySecond)` so SwiftUI automatically re-renders the
+/// Uses `TimelineView(.periodic(from:by:))` so SwiftUI automatically re-renders the
 /// countdown string every second without any ViewModel timer.
 public struct CountdownLabel: View {
     private let viewModel: RaceRowViewModel

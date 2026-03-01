@@ -10,7 +10,7 @@ struct EntainApp: App {
     init() {
         #if DEBUG
         let service = AppMode.current.makeService()
-        let config = AppMode.makeConfiguration()
+        let config = RaceListConfiguration.default
         #else
         let service: any RaceService = DefaultRaceService(network: NetworkService())
         let config = RaceListConfiguration.default

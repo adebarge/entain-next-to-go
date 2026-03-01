@@ -13,7 +13,7 @@ Model ← Services
 Model ← ViewModels ← UI ← App
 ```
 
-- **Model** — Domain types (`Race`, `RaceCategory`), `RaceService` protocol, `CountdownFormatter`
+- **Model** — Domain types (`Race`, `RaceCategory`), `RaceService` protocol
 - **Services** — `NetworkService` actor, `DefaultRaceService`, API DTOs
 - **ViewModels** — `RaceListViewModel` (`@Observable`, `@MainActor`)
 - **UI** — All SwiftUI views and native animations
@@ -61,7 +61,6 @@ swiftlint --config .swiftlint.yml
 
 ## Testing Notes
 
-- `CountdownFormatterTests` — pure unit tests, no async
 - `RaceListViewModelTests` — uses `MockRaceService`, covers filtering, expiry, refill, error handling
 - `@MainActor` isolation on the ViewModel requires tests to be `@MainActor` too
 
