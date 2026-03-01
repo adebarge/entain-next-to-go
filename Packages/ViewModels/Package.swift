@@ -1,10 +1,10 @@
-// swift-tools-version: 6.0
+// swift-tools-version: 6.2
 import PackageDescription
 
 let package = Package(
     name: "ViewModels",
     defaultLocalization: "en",
-    platforms: [.iOS(.v18), .macOS(.v14)],
+    platforms: [.iOS(.v26)],
     products: [
         .library(name: "ViewModels", targets: ["ViewModels"])
     ],
