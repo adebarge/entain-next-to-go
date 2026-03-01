@@ -93,6 +93,23 @@ xcodegen generate
 - `EntainTests`:
   - Project-level XCTest smoke test target for `xcodebuild test`
 
+## Settings App (Debug Builds Only)
+
+The app exposes a **Developer** section in iOS Settings for debug builds:
+
+| Setting | Key | Options / Default |
+|---------|-----|-------------------|
+| Data Source | `app_mode` | **Live** (default), Demo |
+| Simulate Error | `demo_simulate_error` | Off (default) |
+| Simulate Empty State | `demo_simulate_empty_state` | Off (default) |
+| Loading Delay (s) | `demo_loading_delay` | — |
+
+- **Live** — fetches real data from `api.neds.com.au`
+- **Demo** — uses `DemoRaceService` with local fixture data; the overrides below only apply in Demo mode
+- **Simulate Error** — `DemoRaceService` throws an error instead of returning races
+- **Simulate Empty State** — `DemoRaceService` returns an empty list
+- **Loading Delay** — artificial delay (seconds) before `DemoRaceService` returns data
+
 ## Verification
 
 | Check | How |
