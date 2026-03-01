@@ -34,7 +34,7 @@ The `ViewModels` package depends only on the `RaceService` **protocol** from Mod
 
 ## Requirements
 
-- Xcode 18.0+
+- Xcode 26.3+
 - iOS 26.0 deployment target
 - Swift 6
 
@@ -86,6 +86,10 @@ xcodegen generate
   - Localized countdown formatting for future/past races
   - Singular/plural minute and second formatting
   - Accessibility and static label formatting
+- `ServicesTests`:
+  - `APIEndpoint` builds correct URL, method, and query parameters
+  - `NextRacesResponse` decodes in `next_to_go` order and skips unknown categories
+  - `NetworkService` throws `invalidResponse`, `httpError`, and `decodingFailed` on bad responses
 - `EntainTests`:
   - Project-level XCTest smoke test target for `xcodebuild test`
 
