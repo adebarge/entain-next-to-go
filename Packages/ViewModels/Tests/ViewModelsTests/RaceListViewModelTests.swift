@@ -65,15 +65,15 @@ struct RaceListViewModelTests {
     func fetchesAndShowsFiveRaces() async throws {
         let mock = MockRaceService()
         mock.racesToReturn = (1...7).map { Race.make(id: "race-\($0)", raceNumber: $0) }
-        let vm = RaceListViewModel(service: mock)
-        defer { vm.stop() }
+        let testSubject = RaceListViewModel(service: mock)
+        defer { testSubject.stop() }
 
-        vm.start()
-        try await waitUntil { vm.visibleRaces.count == 5 }
+        testSubject.start()
+        try await waitUntil { testSubject.visibleRaces.count == 5 }
 
-        #expect(vm.visibleRaces.count == 5)
-        #expect(vm.error == nil)
-        #expect(!vm.isLoading)
+        #expect(testSubject.visibleRaces.count == 5)
+        #expect(testSubject.error == nil)
+        #expect(!testSubject.isLoading)
     }
 
     @Test("Filters to selected category")
@@ -86,15 +86,15 @@ struct RaceListViewModelTests {
             Race.make(id: "r1", category: .harness),
             Race.make(id: "h3", category: .horse)
         ]
-        let vm = RaceListViewModel(service: mock)
-        defer { vm.stop() }
-        vm.start()
-        try await waitUntil { vm.visibleRaces.count == 5 }
+        let testSubject = RaceListViewModel(service: mock)
+        defer { testSubject.stop() }
+        testSubject.start()
+        try await waitUntil { testSubject.visibleRaces.count == 5 }
 
-        vm.toggleCategory(.horse)
+        testSubject.toggleCategory(.horse)
 
-        #expect(vm.visibleRaces.allSatisfy { $0.category == .horse })
-        #expect(vm.visibleRaces.count == 3)
+        #expect(testSubject.visibleRaces.allSatisfy { $0.category == .horse })
+        #expect(testSubject.visibleRaces.count == 3)
     }
 
     @Test("Deselecting all categories shows all races")
@@ -105,16 +105,16 @@ struct RaceListViewModelTests {
             Race.make(id: "g1", category: .greyhound),
             Race.make(id: "r1", category: .harness)
         ]
-        let vm = RaceListViewModel(service: mock)
-        defer { vm.stop() }
-        vm.start()
-        try await waitUntil { vm.visibleRaces.count == 3 }
+        let testSubject = RaceListViewModel(service: mock)
+        defer { testSubject.stop() }
+        testSubject.start()
+        try await waitUntil { testSubject.visibleRaces.count == 3 }
 
-        vm.toggleCategory(.horse)
-        #expect(vm.visibleRaces.count == 1)
+        testSubject.toggleCategory(.horse)
+        #expect(testSubject.visibleRaces.count == 1)
 
-        vm.toggleCategory(.horse) // deselect
-        #expect(vm.visibleRaces.count == 3)
+        testSubject.toggleCategory(.horse) // deselect
+        #expect(testSubject.visibleRaces.count == 3)
     }
 
     @Test("Expired races (older than 60s) are pruned from visible list")
@@ -124,13 +124,13 @@ struct RaceListViewModelTests {
         let future = Race.make(id: "future", start: Date().addingTimeInterval(300))
         mock.racesToReturn = [expired, future]
 
-        let vm = RaceListViewModel(service: mock)
-        defer { vm.stop() }
-        vm.start()
-        try await waitUntil { !vm.visibleRaces.isEmpty }
+        let testSubject = RaceListViewModel(service: mock)
+        defer { testSubject.stop() }
+        testSubject.start()
+        try await waitUntil { !testSubject.visibleRaces.isEmpty }
 
         // applyFilter is called during fetchRaces and excludes races past the 60s expiry window
-        let visible = vm.visibleRaces
+        let visible = testSubject.visibleRaces
         #expect(!visible.contains(where: { $0.id == "expired" }))
         #expect(visible.contains(where: { $0.id == "future" }))
     }
@@ -140,11 +140,11 @@ struct RaceListViewModelTests {
         let mock = MockRaceService()
         // First fetch: 3 races (below threshold of 5)
         mock.racesToReturn = (1...3).map { Race.make(id: "r\($0)", raceNumber: $0) }
-        let vm = RaceListViewModel(service: mock, configuration: RaceListConfiguration(minimumFetchInterval: 2))
-        defer { vm.stop() }
+        let testSubject = RaceListViewModel(service: mock, configuration: RaceListConfiguration(minimumFetchInterval: 2))
+        defer { testSubject.stop() }
 
-        vm.start()
-        try await waitUntil { mock.fetchCount >= 1 && vm.visibleRaces.count == 3 }
+        testSubject.start()
+        try await waitUntil { mock.fetchCount >= 1 && testSubject.visibleRaces.count == 3 }
         let firstFetchCount = mock.fetchCount
 
         // Wait less than throttle interval; should not fetch yet.
@@ -154,69 +154,73 @@ struct RaceListViewModelTests {
         // After interval elapses, next tick should trigger refetch.
         mock.racesToReturn = (4...8).map { Race.make(id: "r\($0)", raceNumber: $0) }
         try await waitUntil(timeout: .seconds(4)) {
-            mock.fetchCount > firstFetchCount && vm.visibleRaces.count == 5
+            mock.fetchCount > firstFetchCount && testSubject.visibleRaces.count == 5
         }
 
         #expect(mock.fetchCount > firstFetchCount)
-        #expect(vm.visibleRaces.count == 5)
+        #expect(testSubject.visibleRaces.count == 5)
     }
 
     @Test("Error is surfaced when fetch fails")
     func surfacesError() async throws {
         let mock = MockRaceService()
         mock.shouldThrow = true
-        let vm = RaceListViewModel(service: mock)
-        defer { vm.stop() }
+        let testSubject = RaceListViewModel(service: mock)
+        defer { testSubject.stop() }
 
-        vm.start()
-        try await waitUntil { vm.error != nil }
+        testSubject.start()
+        try await waitUntil { testSubject.error != nil }
 
-        #expect(vm.error != nil)
-        #expect(vm.visibleRaces.isEmpty)
+        #expect(testSubject.error != nil)
+        #expect(testSubject.visibleRaces.isEmpty)
     }
 
     @Test("Error copy is generic and user-friendly")
     func usesGenericErrorMessage() {
-        #expect(RaceListViewModel.errorMessage == "We couldn't load races right now. Please try again.")
-        #expect(!RaceListViewModel.errorMessage.contains("NSURLErrorDomain"))
+        let mock = MockRaceService()
+        let testSubject = RaceListViewModel(service: mock)
+        #expect(testSubject.errorMessage == "We couldn't load races right now. Please try again.")
+        #expect(!testSubject.errorMessage.contains("NSURLErrorDomain"))
     }
 
-    @Test("Error accessibility label is static and non-technical")
-    func usesStaticErrorScreenLabel() {
-        #expect(RaceListViewModel.errorScreenLabel == "Unable to load races. Tap 'Try Again' to retry.")
-        #expect(!RaceListViewModel.errorScreenLabel.contains("%@"))
+    @Test("Error accessibility label is non-technical")
+    func usesErrorScreenLabel() {
+        let mock = MockRaceService()
+        let testSubject = RaceListViewModel(service: mock)
+        #expect(testSubject.errorScreenLabel == "Unable to load races. Tap 'Try Again' to retry.")
+        #expect(!testSubject.errorScreenLabel.contains("%@"))
     }
 
     @Test("Retry clears error and re-fetches")
     func retryClears() async throws {
         let mock = MockRaceService()
         mock.shouldThrow = true
-        let vm = RaceListViewModel(service: mock)
-        defer { vm.stop() }
-        vm.start()
-        try await waitUntil { vm.error != nil }
-        #expect(vm.error != nil)
+        let testSubject = RaceListViewModel(service: mock)
+        defer { testSubject.stop() }
+        testSubject.start()
+        try await waitUntil { testSubject.error != nil }
+        #expect(testSubject.error != nil)
 
         mock.shouldThrow = false
         mock.racesToReturn = [Race.make(id: "r1")]
-        vm.retry()
-        try await waitUntil { vm.error == nil && !vm.visibleRaces.isEmpty }
+        testSubject.retry()
+        try await waitUntil { testSubject.error == nil && !testSubject.visibleRaces.isEmpty }
 
-        #expect(vm.error == nil)
-        #expect(!vm.visibleRaces.isEmpty)
+        #expect(testSubject.error == nil)
+        #expect(!testSubject.visibleRaces.isEmpty)
     }
 
     @Test("Error stops the tick loop; retry restarts it")
     func errorStopsTickLoopAndRetryRestarts() async throws {
         let mock = MockRaceService()
         mock.shouldThrow = true
-        let vm = RaceListViewModel(service: mock)
-        defer { vm.stop() }
+        let testSubject = RaceListViewModel(service: mock)
+        defer { testSubject.stop() }
 
-        vm.start()
-        try await waitUntil { vm.error != nil }
+        testSubject.start()
+        try await waitUntil { testSubject.error != nil }
 
-        #expect(vm.error != nil)
+        #expect(testSubject.error != nil)
         let fetchCountAfterError = mock.fetchCount
 
         // Wait longer than one tick interval — no additional fetches should occur
@@ -226,24 +230,24 @@ struct RaceListViewModelTests {
         // Retry should clear the error and trigger a new fetch
         mock.shouldThrow = false
         mock.racesToReturn = (1...5).map { Race.make(id: "r\($0)", raceNumber: $0) }
-        vm.retry()
-        try await waitUntil { vm.error == nil && !vm.visibleRaces.isEmpty }
+        testSubject.retry()
+        try await waitUntil { testSubject.error == nil && !testSubject.visibleRaces.isEmpty }
 
-        #expect(vm.error == nil)
-        #expect(!vm.visibleRaces.isEmpty)
+        #expect(testSubject.error == nil)
+        #expect(!testSubject.visibleRaces.isEmpty)
     }
 
     @Test("Stop during in-flight fetch does not surface cancellation as error")
     func stopDoesNotSurfaceCancellation() async throws {
         let service = BlockingRaceService()
-        let vm = RaceListViewModel(service: service)
+        let testSubject = RaceListViewModel(service: service)
 
-        vm.start()
+        testSubject.start()
         try await service.waitUntilStarted()
-        vm.stop()
+        testSubject.stop()
         try await Task.sleep(for: .milliseconds(200))
 
-        #expect(vm.error == nil)
+        #expect(testSubject.error == nil)
     }
 
     @Test("Upserts existing race when API returns same id with updated values")
@@ -254,22 +258,22 @@ struct RaceListViewModelTests {
             Race.make(id: "same-id", meetingName: "Old Meeting", raceNumber: 1, start: now.addingTimeInterval(300))
         ]
 
-        let vm = RaceListViewModel(service: mock, configuration: RaceListConfiguration(minimumFetchInterval: 0))
-        defer { vm.stop() }
+        let testSubject = RaceListViewModel(service: mock, configuration: RaceListConfiguration(minimumFetchInterval: 0))
+        defer { testSubject.stop() }
 
-        vm.start()
-        try await waitUntil { vm.visibleRaces.first?.meetingName == "Old Meeting" }
+        testSubject.start()
+        try await waitUntil { testSubject.visibleRaces.first?.meetingName == "Old Meeting" }
 
         mock.racesToReturn = [
             Race.make(id: "same-id", meetingName: "Updated Meeting", raceNumber: 7, start: Date.now.addingTimeInterval(120))
         ]
 
         try await waitUntil(timeout: .seconds(4)) {
-            vm.visibleRaces.first?.meetingName == "Updated Meeting"
+            testSubject.visibleRaces.first?.meetingName == "Updated Meeting"
         }
 
-        #expect(vm.visibleRaces.first?.meetingName == "Updated Meeting")
-        #expect(vm.visibleRaces.first?.raceNumberText == "Race 7")
+        #expect(testSubject.visibleRaces.first?.meetingName == "Updated Meeting")
+        #expect(testSubject.visibleRaces.first?.raceNumberText == "Race 7")
     }
 }
 

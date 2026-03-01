@@ -6,7 +6,7 @@ import Model
 @Suite("RaceRowViewModel")
 struct RaceRowViewModelTests {
 
-    // MARK: - Static string formatting
+    // MARK: - String formatting
 
     @Test("raceNumberText formats race number correctly")
     func raceNumberText() {
@@ -99,15 +99,23 @@ struct RaceRowViewModelTests {
         #expect(row.isStarted(at: now))
     }
 
-    // MARK: - RaceListViewModel static strings
+    // MARK: - RaceListViewModel localized strings
 
     @Test("listTitle equals 'Next to Go'")
+    @MainActor
     func listTitle() {
-        #expect(RaceListViewModel.listTitle == "Next to Go")
+        let testSubject = RaceListViewModel(service: NoopRaceService())
+        #expect(testSubject.listTitle == "Next to Go")
     }
 
     @Test("loadingMessage equals 'Loading races...'")
+    @MainActor
     func loadingMessage() {
-        #expect(RaceListViewModel.loadingMessage == "Loading races...")
+        let testSubject = RaceListViewModel(service: NoopRaceService())
+        #expect(testSubject.loadingMessage == "Loading races...")
     }
+}
+
+private struct NoopRaceService: RaceService {
+    func fetchNextRaces(count: Int) async throws -> [Race] { [] }
 }

@@ -37,34 +37,6 @@ public final class RaceListViewModel {
 
     // MARK: - Static localised strings (view-level labels)
 
-    public nonisolated static let listTitle = NSLocalizedString(
-        "race.list.title", bundle: .module, comment: "")
-    public nonisolated static let emptyTitle = NSLocalizedString(
-        "race.list.empty.title", bundle: .module, comment: "")
-    public nonisolated static let emptyDescription = NSLocalizedString(
-        "race.list.empty.description", bundle: .module, comment: "")
-    public nonisolated static let listAccessibilityLabel = NSLocalizedString(
-        "race.list.accessibility", bundle: .module, comment: "")
-    public nonisolated static let filterBarAccessibilityLabel = NSLocalizedString(
-        "filter.bar.accessibility", bundle: .module, comment: "")
-    public nonisolated static let loadingMessage = NSLocalizedString(
-        "loading.message", bundle: .module, comment: "")
-    public nonisolated static let loadingAccessibilityLabel = NSLocalizedString(
-        "loading.accessibility", bundle: .module, comment: "")
-    public nonisolated static let errorTitle = NSLocalizedString(
-        "error.title", bundle: .module, comment: "")
-    public nonisolated static let errorMessage = NSLocalizedString(
-        "error.message.generic", bundle: .module, comment: "")
-    public nonisolated static let errorRetryButtonText = NSLocalizedString(
-        "error.retry.button", bundle: .module, comment: "")
-    public nonisolated static let errorRetryLabel = NSLocalizedString(
-        "error.retry.label", bundle: .module, comment: "")
-    public nonisolated static let errorRetryHint = NSLocalizedString(
-        "error.retry.hint", bundle: .module, comment: "")
-
-    public nonisolated static let errorScreenLabel = NSLocalizedString(
-        "error.screen.label", bundle: .module, comment: "")
-
     // MARK: - Init
 
     public init(service: any RaceService, configuration: RaceListConfiguration = .default) {
@@ -107,6 +79,61 @@ public final class RaceListViewModel {
             selectedCategories.insert(category)
         }
         applyFilter(since: .now)
+    }
+}
+
+extension RaceListViewModel {
+    
+    public var listTitle: String {
+        NSLocalizedString("race.list.title", bundle: .module, comment: "")
+    }
+    
+    public var emptyTitle: String {
+        NSLocalizedString("race.list.empty.title", bundle: .module, comment: "")
+    }
+    
+    public var emptyDescription: String {
+        NSLocalizedString("race.list.empty.description", bundle: .module, comment: "")
+    }
+    
+    public var listAccessibilityLabel: String {
+        NSLocalizedString("race.list.accessibility", bundle: .module, comment: "")
+    }
+
+    public var filterBarAccessibilityLabel: String {
+        NSLocalizedString("filter.bar.accessibility", bundle: .module, comment: "")
+    }
+
+    public var loadingMessage: String {
+        NSLocalizedString("loading.message", bundle: .module, comment: "")
+    }
+
+    public var loadingAccessibilityLabel: String {
+        NSLocalizedString("loading.accessibility", bundle: .module, comment: "")
+    }
+
+    public var errorTitle: String {
+        NSLocalizedString("error.title", bundle: .module, comment: "")
+    }
+
+    public var errorMessage: String {
+        NSLocalizedString("error.message.generic", bundle: .module, comment: "")
+    }
+
+    public var errorRetryButtonText: String {
+        NSLocalizedString("error.retry.button", bundle: .module, comment: "")
+    }
+
+    public var errorRetryLabel: String {
+        NSLocalizedString("error.retry.label", bundle: .module, comment: "")
+    }
+
+    public var errorRetryHint: String {
+        NSLocalizedString("error.retry.hint", bundle: .module, comment: "")
+    }
+
+    public var errorScreenLabel: String {
+        NSLocalizedString("error.screen.label", bundle: .module, comment: "")
     }
 }
 

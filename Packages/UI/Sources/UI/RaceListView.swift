@@ -15,30 +15,30 @@ public struct RaceListView: View {
             Group {
                 if viewModel.isLoading && viewModel.visibleRaces.isEmpty {
                     LoadingView(
-                        message: RaceListViewModel.loadingMessage,
-                        accessibilityText: RaceListViewModel.loadingAccessibilityLabel
+                        message: viewModel.loadingMessage,
+                        accessibilityText: viewModel.loadingAccessibilityLabel
                     )
                 } else if viewModel.error != nil, viewModel.visibleRaces.isEmpty {
                     ErrorView(
-                        title: RaceListViewModel.errorTitle,
-                        message: RaceListViewModel.errorMessage,
-                        retryButtonText: RaceListViewModel.errorRetryButtonText,
-                        retryLabel: RaceListViewModel.errorRetryLabel,
-                        retryHint: RaceListViewModel.errorRetryHint,
-                        screenLabel: RaceListViewModel.errorScreenLabel,
+                        title: viewModel.errorTitle,
+                        message: viewModel.errorMessage,
+                        retryButtonText: viewModel.errorRetryButtonText,
+                        retryLabel: viewModel.errorRetryLabel,
+                        retryHint: viewModel.errorRetryHint,
+                        screenLabel: viewModel.errorScreenLabel,
                         onRetry: { viewModel.retry() }
                     )
                 } else {
                     raceList
                 }
             }
-            .navigationTitle(RaceListViewModel.listTitle)
+            .navigationTitle(viewModel.listTitle)
             #if os(iOS)
             .toolbarTitleDisplayMode(.inline)
             #endif
             .safeAreaInset(edge: .top, spacing: 0) {
                 FilterBarView(
-                    accessibilityText: RaceListViewModel.filterBarAccessibilityLabel,
+                    accessibilityText: viewModel.filterBarAccessibilityLabel,
                     selectedCategories: viewModel.selectedCategories,
                     isDisabled: viewModel.isFilterBarDisabled,
                     onToggle: { viewModel.toggleCategory($0) }
@@ -64,13 +64,13 @@ public struct RaceListView: View {
         .overlay {
             if viewModel.visibleRaces.isEmpty && !viewModel.isLoading {
                 ContentUnavailableView(
-                    RaceListViewModel.emptyTitle,
+                    viewModel.emptyTitle,
                     systemImage: "flag.checkered",
-                    description: Text(RaceListViewModel.emptyDescription)
+                    description: Text(viewModel.emptyDescription)
                 )
             }
         }
-        .accessibilityLabel(RaceListViewModel.listAccessibilityLabel)
+        .accessibilityLabel(viewModel.listAccessibilityLabel)
     }
 }
 
